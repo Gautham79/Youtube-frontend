@@ -3,6 +3,7 @@ import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import type React from "react"; // Import React
 import { cn } from "@/lib/utils";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 const bricolageGrotesque = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -35,7 +36,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(bricolageGrotesque.className, "antialiased")}>
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

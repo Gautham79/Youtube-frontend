@@ -2,6 +2,14 @@ import { NextResponse } from "next/server";
 import { stripe } from "@/utils/stripe";
 
 export async function POST(req: Request) {
+  // Check if Stripe is enabled
+  if (!stripe) {
+    return NextResponse.json(
+      { error: { message: "Stripe is not enabled" } },
+      { status: 503 }
+    );
+  }
+
   const { priceId } = await req.json();
 
   try {

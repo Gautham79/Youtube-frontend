@@ -1,181 +1,94 @@
-export default function Footer() {
+import Link from "next/link";
+import { TreePine, Mail, Twitter, Youtube, Instagram } from "lucide-react";
+
+const Footer = () => {
   return (
-    <footer className="border-t border-zinc-800 bg-[#0F0F0F] px-4 py-12 md:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {/* Brand Column */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <span className="text-xl font-semibold text-white">
-                ⚡ ShipFree
-              </span>
-            </div>
-            <p className="text-sm text-zinc-400">Built for makers, by makers</p>
-            <p className="text-sm text-zinc-500">
-              Copyright © 2025 - All rights reserved
+    <footer className="bg-gray-900 text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Company Info */}
+          <div className="lg:col-span-2">
+            <Link href="/" className="flex items-center space-x-2 mb-4">
+              <div className="flex items-center justify-center w-8 h-8 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg">
+                <TreePine className="w-5 h-5 text-white" />
+              </div>
+              <span className="text-xl font-bold">ReelForest</span>
+            </Link>
+            <p className="text-gray-400 mb-6 max-w-md">
+              AI-powered video creation platform that automates the entire process from trending topics 
+              to published videos. Create viral content in minutes, not hours.
             </p>
-            <div className="inline-flex items-center gap-2 rounded-md border border-zinc-500 bg-zinc-800/50 px-4 py-2 text-xs text-zinc-400">
-              Built with ⚡ ShipFree
-            </div>
           </div>
 
-          {/* Links Column */}
+          {/* Product Links */}
           <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-zinc-400">
-              🚀 Links
-            </h3>
-            <ul className="space-y-3 text-sm">
+            <h3 className="text-lg font-semibold mb-4">Product</h3>
+            <ul className="space-y-3">
               <li>
-                <a
-                  href="#wall-of-love"
-                  className="text-zinc-400 hover:text-white"
-                >
-                  Wall of love
-                </a>
+                <Link href="/#features" className="text-gray-400 hover:text-white transition-colors">
+                  Features
+                </Link>
               </li>
               <li>
-                <a href="#pricing" className="text-zinc-400 hover:text-white">
+                <Link href="/pricing" className="text-gray-400 hover:text-white transition-colors">
                   Pricing
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="https://x.com/idee8agency"
-                  target="_blank"
-                  className="text-zinc-400 hover:text-white"
-                >
-                  Twitter
-                </a>
+                <Link href="/#how-it-works" className="text-gray-400 hover:text-white transition-colors">
+                  How It Works
+                </Link>
               </li>
               <li>
-                <a
-                  href="https://github.com/idee8/shipfree"
-                  target="_blank"
-                  className="text-zinc-400 hover:text-white"
-                >
-                  Github
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://shipfree.idee8.agency/docs"
-                  target="_blank"
-                  className="text-zinc-400 hover:text-white"
-                >
-                  Documentation
-                </a>
+                <Link href="/dashboard" className="text-gray-400 hover:text-white transition-colors">
+                  Dashboard
+                </Link>
               </li>
             </ul>
           </div>
 
-          {/* Legal Column */}
+          {/* Support Links */}
           <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-zinc-400">
-              📜 Legal
-            </h3>
-            <ul className="space-y-3 text-sm">
+            <h3 className="text-lg font-semibold mb-4">Support</h3>
+            <ul className="space-y-3">
               <li>
-                <a
-                  href="/tos"
-                  target="_blank"
-                  className="text-zinc-400 hover:text-white"
-                >
-                  Terms of Servise
-                </a>
+                <Link href="/support" className="text-gray-400 hover:text-white transition-colors">
+                  Help Center
+                </Link>
               </li>
               <li>
-                <a
-                  href="/privacy"
-                  target="_blank"
-                  className="text-zinc-400 hover:text-white"
-                >
-                  Privacy Policy
-                </a>
+                <Link href="/support" className="text-gray-400 hover:text-white transition-colors">
+                  Contact Us
+                </Link>
               </li>
               <li>
-                <a
-                  href="/licenses"
-                  target="_blank"
-                  className="text-zinc-400 hover:text-white"
-                >
-                  Licenses
-                </a>
+                <Link href="/tutorials" className="text-gray-400 hover:text-white transition-colors">
+                  Tutorials
+                </Link>
               </li>
             </ul>
-          </div>
-
-          {/* By the Creator Column */}
-          <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-zinc-400">
-              🌎 By the Creator of ShipFree
-            </h3>
-            <ul className="space-y-3 text-sm">
-              {/* {["idee8.agency", "React AI", "Code Mentor"].map((item) => ( */}
-              <li>
-                <a
-                  href="https://idee8.agency"
-                  target="_blank"
-                  className="text-zinc-400 hover:text-white"
-                >
-                  Idee8
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://codementor.idee8.agency"
-                  className="text-zinc-400 hover:text-white"
-                  target="_blank"
-                >
-                  Code Mentor
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://reactai.idee8.agency"
-                  className="text-zinc-400 hover:text-white"
-                  target="_blank"
-                >
-                  React AI
-                </a>
-              </li>
-            </ul>
-
-            {/* Newsletter Section */}
-            <div className="mt-6">
-              <h4 className="mb-3 text-sm font-semibold text-zinc-400">
-                📩 Newsletter for Makers
-              </h4>
-              <p className="mb-4 text-sm text-zinc-500">
-                Get startup tips & resources every week!
-              </p>
-              <form className="flex gap-2">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 rounded-lg bg-zinc-800/50 px-3 py-2 text-sm text-white placeholder-zinc-500 outline-none ring-zinc-700 transition-shadow focus:ring-2"
-                />
-                <button
-                  type="submit"
-                  className="rounded-lg bg-white px-4 py-2 text-sm font-medium text-black hover:bg-zinc-200"
-                >
-                  Subscribe
-                </button>
-              </form>
-            </div>
           </div>
         </div>
 
-        <div className="mt-12 border-t border-zinc-800 pt-8 text-center text-sm text-zinc-500">
-          © 2025 ShipFree. All Rights Reserved. Cooked for you by{" "}
-          <a
-            href="https://idee8.agency"
-            className="text-zinc-400 hover:text-white"
-          >
-            idee8.agency
-          </a>
-          .
+        {/* Bottom Section */}
+        <div className="border-t border-gray-800 mt-12 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="text-gray-400 text-sm mb-4 md:mb-0">
+              © 2025 ReelForest. All rights reserved.
+            </div>
+            <div className="flex space-x-6 text-sm">
+              <Link href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="/tos" className="text-gray-400 hover:text-white transition-colors">
+                Terms & Conditions
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;
