@@ -310,7 +310,7 @@ async function concatenateSegments(
 ): Promise<void> {
   console.log(`🔗 [SmartConcat] Starting concatenation for ${segmentPaths.length} segments`);
   console.log(`🎯 [SmartConcat] Transition type: ${settings.transition || 'none'}`);
-  console.log(`🚫 [SmartConcat] Background music: COMPLETELY REMOVED to fix sync issues`);
+  console.log(`🎵 [SmartConcat] Background music: Will be added after concatenation/transitions`);
 
   // Check if transitions are requested
   if (settings.transition && settings.transition !== 'none') {
@@ -689,7 +689,62 @@ export async function generateVideo(
       onProgress
     );
 
-    // Stage 4: Finalize
+    // Stage 4: Add background music (if enabled)
+    if (settings.backgroundMusic?.enabled) {
+      onProgress?.({
+        stage: 'adding_music',
+        totalScenes: scenes.length,
+        percent: 85,
+        message: 'Adding background music...'
+      });
+
+      console.log('🎵 [VideoGen] Adding background music to final video');
+      
+      // Create temporary file for music processing
+      const tempVideoPath = outputPath + '.temp.mp4';
+      fs.renameSync(outputPath, tempVideoPath);
+      
+      try {
+        await addBackgroundMusicToVideo(
+          tempVideoPath,
+          outputPath,
+          settings.backgroundMusic,
+          {
+            onProgress: (musicProgress) => {
+              onProgress?.({
+                stage: 'adding_music',
+                totalScenes: scenes.length,
+                percent: 85 + (musicProgress.percent * 0.1), // Map to 85-95% range
+                message: 'Processing background music...',
+                ffmpegProgress: musicProgress
+              });
+            },
+            tempDir: path.join(tempDir, 'background-music'),
+            timeout: 300000 // 5 minutes for music processing
+          }
+        );
+        
+        // Clean up temporary video file
+        fs.unlinkSync(tempVideoPath);
+        console.log('✅ [VideoGen] Background music added successfully');
+        
+      } catch (musicError) {
+        console.error('❌ [VideoGen] Background music processing failed:', musicError);
+        
+        // Restore original video if music processing fails
+        if (fs.existsSync(tempVideoPath)) {
+          fs.renameSync(tempVideoPath, outputPath);
+          console.log('🔄 [VideoGen] Restored original video without background music');
+        }
+        
+        // Continue without background music rather than failing completely
+        console.warn('⚠️ [VideoGen] Continuing without background music due to processing error');
+      }
+    } else {
+      console.log('🔇 [VideoGen] Background music disabled, skipping music stage');
+    }
+
+    // Stage 5: Finalize
     onProgress?.({
       stage: 'finalizing',
       totalScenes: scenes.length,
@@ -765,7 +820,7 @@ export function getDefaultVideoSettings(): VideoSettings {
     transition: 'none', // Disabled by default for debugging
     transitionDuration: 1,
     backgroundMusic: { 
-      enabled: false, // ✅ DISABLED: Background music completely disabled to fix sync issues
+      enabled: true, // ✅ RE-ENABLED: Background music now safe with fixed audio sync
       source: 'local',
       volume: 30,
       fadeIn: 2,
