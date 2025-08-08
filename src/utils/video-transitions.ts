@@ -150,23 +150,22 @@ async function generateTwoSegmentFadeTransition(
         return;
       }
       
-      // Calculate offset: start transition AFTER the first video completes
-      // This ensures the narration plays fully before transitioning starts
-      const offset = firstVideoDuration;
+      // Calculate offset: start transition BEFORE the first video ends to create overlap
+      // This creates a proper crossfade effect
+      const offset = Math.max(0, firstVideoDuration - duration);
       
       console.log(`🎨 [FadeTransition] Using offset: ${offset}s, duration: ${duration}s`);
       
-      // FIXED: Use simple audio concatenation without filter_complex to preserve timing
+      // FIXED: Properly concatenate audio streams to preserve all scenes
       const ffmpegArgs = [
         '-i', segmentPaths[0],
         '-i', segmentPaths[1],
         '-filter_complex', 
-        `[0:v][1:v]xfade=transition=fade:duration=${duration}:offset=${offset}[v]`,
+        `[0:v][1:v]xfade=transition=fade:duration=${duration}:offset=${offset}[v];[0:a][1:a]concat=n=2:v=0:a=1[a]`,
         '-map', '[v]',
-        '-map', '0:a',  // Use first audio stream as-is
-        '-map', '1:a',  // Use second audio stream as-is  
+        '-map', '[a]',  // Use concatenated audio stream
         '-c:v', 'libx264',
-        '-c:a', 'copy',  // Copy audio without re-encoding
+        '-c:a', 'aac',  // Re-encode audio to ensure compatibility
         '-preset', 'fast',
         '-pix_fmt', 'yuv420p',
         '-y',
@@ -362,23 +361,22 @@ async function generateTwoSegmentSlideTransition(
         return;
       }
       
-      // Calculate offset: start transition AFTER the first video completes
-      // This ensures the narration plays fully before transitioning starts
-      const offset = firstVideoDuration;
+      // Calculate offset: start transition BEFORE the first video ends to create overlap
+      // This creates a proper crossfade effect
+      const offset = Math.max(0, firstVideoDuration - duration);
       
       console.log(`🎨 [SlideTransition] Using offset: ${offset}s, duration: ${duration}s`);
       
-      // FIXED: Use simple audio concatenation without filter_complex to preserve timing
+      // FIXED: Properly concatenate audio streams to preserve all scenes
       const ffmpegArgs = [
         '-i', segmentPaths[0],
         '-i', segmentPaths[1],
         '-filter_complex', 
-        `[0:v][1:v]xfade=transition=slideleft:duration=${duration}:offset=${offset}[v]`,
+        `[0:v][1:v]xfade=transition=slideleft:duration=${duration}:offset=${offset}[v];[0:a][1:a]concat=n=2:v=0:a=1[a]`,
         '-map', '[v]',
-        '-map', '0:a',  // Use first audio stream as-is
-        '-map', '1:a',  // Use second audio stream as-is  
+        '-map', '[a]',  // Use concatenated audio stream
         '-c:v', 'libx264',
-        '-c:a', 'copy',  // Copy audio without re-encoding
+        '-c:a', 'aac',  // Re-encode audio to ensure compatibility
         '-preset', 'fast',
         '-pix_fmt', 'yuv420p',
         '-y',
@@ -466,23 +464,22 @@ async function generateTwoSegmentZoomTransition(
         return;
       }
       
-      // Calculate offset: start transition AFTER the first video completes
-      // This ensures the narration plays fully before transitioning starts
-      const offset = firstVideoDuration;
+      // Calculate offset: start transition BEFORE the first video ends to create overlap
+      // This creates a proper crossfade effect
+      const offset = Math.max(0, firstVideoDuration - duration);
       
       console.log(`🎨 [ZoomTransition] Using offset: ${offset}s, duration: ${duration}s`);
       
-      // FIXED: Use simple audio concatenation without filter_complex to preserve timing
+      // FIXED: Properly concatenate audio streams to preserve all scenes
       const ffmpegArgs = [
         '-i', segmentPaths[0],
         '-i', segmentPaths[1],
         '-filter_complex', 
-        `[0:v][1:v]xfade=transition=zoomin:duration=${duration}:offset=${offset}[v]`,
+        `[0:v][1:v]xfade=transition=zoomin:duration=${duration}:offset=${offset}[v];[0:a][1:a]concat=n=2:v=0:a=1[a]`,
         '-map', '[v]',
-        '-map', '0:a',  // Use first audio stream as-is
-        '-map', '1:a',  // Use second audio stream as-is  
+        '-map', '[a]',  // Use concatenated audio stream
         '-c:v', 'libx264',
-        '-c:a', 'copy',  // Copy audio without re-encoding
+        '-c:a', 'aac',  // Re-encode audio to ensure compatibility
         '-preset', 'fast',
         '-pix_fmt', 'yuv420p',
         '-y',
@@ -537,139 +534,747 @@ async function generateTwoSegmentZoomTransition(
   });
 }
 
-// Multi-segment fade transition (chain multiple crossfades)
+// Multi-segment fade transition - FIXED to handle all segments properly
 async function generateMultiSegmentFadeTransition(
   segmentPaths: string[],
   settings: VideoSettings,
   outputPath: string,
   onProgress?: (progress: { percent: number; message: string }) => void
 ): Promise<string> {
-  console.log('🎨 [MultiFadeTransition] Chaining multiple fade transitions');
-  
-  // For multiple segments, we'll process them in pairs
-  let currentOutput = segmentPaths[0];
-  const tempDir = path.dirname(segmentPaths[0]);
-  
-  for (let i = 1; i < segmentPaths.length; i++) {
-    const tempOutput = path.join(tempDir, `temp_fade_${i}.mp4`);
-    const isLastSegment = i === segmentPaths.length - 1;
-    const finalOutput = isLastSegment ? outputPath : tempOutput;
+  return new Promise(async (resolve, reject) => {
+    console.log('🎨 [MultiFadeTransition] FIXED: Building unified complex filter for all segments');
     
-    onProgress?.({ 
-      percent: (i / segmentPaths.length) * 100, 
-      message: `Applying fade transition ${i}/${segmentPaths.length - 1}...` 
-    });
+    const duration = settings.transitionDuration || 1;
+    const numSegments = segmentPaths.length;
     
-    await generateTwoSegmentFadeTransition(
-      [currentOutput, segmentPaths[i]], 
-      settings, 
-      finalOutput,
-      onProgress
-    );
-    
-    // Clean up previous temp file (but not the original segments)
-    if (i > 1 && currentOutput.includes('temp_fade_')) {
+    // For 2 segments, use the proper two-segment fade transition function
+    if (numSegments === 2) {
+      console.log('🎨 [MultiFadeTransition] 2 segments detected, using proper two-segment transition');
       try {
-        fs.unlinkSync(currentOutput);
-      } catch (e) {
-        console.warn('⚠️ [MultiFadeTransition] Could not clean up temp file:', e);
+        const result = await generateTwoSegmentFadeTransition(segmentPaths, settings, outputPath, onProgress);
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+      return;
+    }
+
+    console.log(`🎨 [MultiFadeTransition] FIXED: Processing ${numSegments} segments with unified approach`);
+    
+    // Get durations of all segments first
+    const segmentDurations: number[] = [];
+    let totalProcessed = 0;
+    
+    for (const segmentPath of segmentPaths) {
+      try {
+        const { spawn } = require('child_process');
+        const ffprobeArgs = ['-v', 'quiet', '-show_entries', 'format=duration', '-of', 'csv=p=0', segmentPath];
+        
+        const duration = await new Promise<number>((resolveDuration, rejectDuration) => {
+          const ffprobe = spawn('ffprobe', ffprobeArgs);
+          let durationStr = '';
+          
+          ffprobe.stdout.on('data', (data: Buffer) => {
+            durationStr += data.toString().trim();
+          });
+          
+          ffprobe.on('close', (code: number) => {
+            if (code === 0 && durationStr) {
+              resolveDuration(parseFloat(durationStr));
+            } else {
+              rejectDuration(new Error(`Could not get duration for ${segmentPath}`));
+            }
+          });
+          
+          ffprobe.on('error', rejectDuration);
+        });
+        
+        segmentDurations.push(duration);
+        totalProcessed++;
+        
+        onProgress?.({ 
+          percent: (totalProcessed / numSegments) * 20, 
+          message: `Analyzing segment ${totalProcessed}/${numSegments}...` 
+        });
+        
+      } catch (error) {
+        console.warn(`⚠️ [MultiFadeTransition] Could not get duration for ${segmentPath}, falling back to concatenation`);
+        const result = await generateReEncodedConcatenation(segmentPaths, outputPath, onProgress);
+        resolve(result);
+        return;
       }
     }
     
-    currentOutput = finalOutput;
-  }
-  
-  return outputPath;
+    console.log('📏 [MultiFadeTransition] Segment durations:', segmentDurations);
+    
+    // Build unified complex filter for all segments
+    const videoFilters: string[] = [];
+    const audioInputs: string[] = [];
+    
+    // Calculate cumulative offsets for transitions
+    let cumulativeOffset = 0;
+    
+    // Build video transition chain
+    let currentVideoLabel = '[0:v]';
+    
+    for (let i = 1; i < numSegments; i++) {
+      const prevDuration = segmentDurations[i - 1];
+      const offset = Math.max(0, cumulativeOffset + prevDuration - duration);
+      
+      const nextVideoLabel = i === numSegments - 1 ? '[v]' : `[v${i}]`;
+      
+      videoFilters.push(
+        `${currentVideoLabel}[${i}:v]xfade=transition=fade:duration=${duration}:offset=${offset}${nextVideoLabel}`
+      );
+      
+      currentVideoLabel = nextVideoLabel;
+      cumulativeOffset += prevDuration - duration; // Account for overlap
+      
+      console.log(`🎨 [MultiFadeTransition] Transition ${i}: offset=${offset}s, duration=${duration}s`);
+    }
+    
+    // FIXED: Build synchronized audio that matches video transition timing
+    const audioFilters: string[] = [];
+    let audioOffset = 0;
+    
+    // First audio segment starts at time 0
+    audioFilters.push(`[0:a]adelay=0[a0]`);
+    
+    // Calculate audio delays to match video transition timing
+    for (let i = 1; i < numSegments; i++) {
+      const prevDuration = segmentDurations[i - 1];
+      // Audio should start when the video transition begins (accounting for overlap)
+      audioOffset += prevDuration - duration; // Subtract transition duration for overlap
+      const audioDelayMs = Math.max(0, audioOffset * 1000); // Convert to milliseconds
+      
+      audioFilters.push(`[${i}:a]adelay=${audioDelayMs}[a${i}]`);
+      console.log(`🎵 [MultiFadeTransition] Audio ${i}: delay=${audioDelayMs}ms (${audioOffset}s)`);
+    }
+    
+    // Mix all delayed audio streams
+    const delayedAudioInputs = Array.from({ length: numSegments }, (_, i) => `[a${i}]`).join('');
+    const audioMixFilter = `${delayedAudioInputs}amix=inputs=${numSegments}:duration=longest[a]`;
+    
+    const videoFilterChain = videoFilters.join(';');
+    const audioFilterChain = `${audioFilters.join(';')};${audioMixFilter}`;
+    const complexFilter = `${videoFilterChain};${audioFilterChain}`;
+    
+    console.log(`🎨 [MultiFadeTransition] UNIFIED Complex filter: ${complexFilter}`);
+    
+    const { spawn } = require('child_process');
+    const ffmpegArgs = [
+      ...segmentPaths.flatMap(path => ['-i', path]),
+      '-filter_complex', complexFilter,
+      '-map', '[v]',
+      '-map', '[a]',
+      '-c:v', 'libx264',
+      '-c:a', 'aac',
+      '-preset', 'fast',
+      '-pix_fmt', 'yuv420p',
+      '-avoid_negative_ts', 'make_zero',
+      '-fflags', '+genpts',
+      '-y',
+      outputPath
+    ];
+
+    console.log('🎨 [MultiFadeTransition] UNIFIED FFmpeg command:', 'ffmpeg', ffmpegArgs.join(' '));
+    
+    const ffmpeg = spawn('ffmpeg', ffmpegArgs);
+    let hasProgress = false;
+    let errorOutput = '';
+    
+    ffmpeg.on('close', (code: number) => {
+      if (code === 0) {
+        console.log('✅ [MultiFadeTransition] FIXED: Multi-segment fade transition completed successfully');
+        onProgress?.({ percent: 100, message: 'Multi-segment fade transition complete!' });
+        resolve(outputPath);
+      } else {
+        console.error('❌ [MultiFadeTransition] FFmpeg failed with code:', code);
+        console.error('❌ [MultiFadeTransition] Error output:', errorOutput);
+        // Fall back to re-encoded concatenation
+        console.log('🔄 [MultiFadeTransition] Falling back to re-encoded concatenation');
+        generateReEncodedConcatenation(segmentPaths, outputPath, onProgress)
+          .then(resolve)
+          .catch(reject);
+      }
+    });
+    
+    ffmpeg.on('error', (error: Error) => {
+      console.error('❌ [MultiFadeTransition] FFmpeg spawn error:', error);
+      // Fall back to re-encoded concatenation
+      generateReEncodedConcatenation(segmentPaths, outputPath, onProgress)
+        .then(resolve)
+        .catch(reject);
+    });
+    
+    ffmpeg.stderr.on('data', (data: Buffer) => {
+      const output = data.toString();
+      errorOutput += output;
+      
+      if (output.includes('time=') && !hasProgress) {
+        hasProgress = true;
+        onProgress?.({ percent: 70, message: 'Applying unified multi-segment fade transitions...' });
+      }
+      
+      // Check for actual errors
+      if (output.includes('Error') || output.includes('error')) {
+        console.error('⚠️ [MultiFadeTransition] FFmpeg error detected:', output);
+      }
+    });
+  });
 }
 
-// Multi-segment slide transition (chain multiple slide transitions)
+// Re-encoded concatenation to ensure all segments are properly included
+async function generateReEncodedConcatenation(
+  segmentPaths: string[],
+  outputPath: string,
+  onProgress?: (progress: { percent: number; message: string }) => void
+): Promise<string> {
+  return new Promise((resolve, reject) => {
+    console.log(`🔄 [ReEncodedConcat] Starting re-encoded concatenation for ${segmentPaths.length} segments`);
+    
+    // Validate all segments exist and have content
+    for (let i = 0; i < segmentPaths.length; i++) {
+      const segmentPath = segmentPaths[i];
+      if (!fs.existsSync(segmentPath)) {
+        const error = `Segment ${i + 1} does not exist: ${segmentPath}`;
+        console.error(`❌ [ReEncodedConcat] ${error}`);
+        reject(new Error(error));
+        return;
+      }
+      
+      const stats = fs.statSync(segmentPath);
+      if (stats.size === 0) {
+        const error = `Segment ${i + 1} is empty: ${segmentPath}`;
+        console.error(`❌ [ReEncodedConcat] ${error}`);
+        reject(new Error(error));
+        return;
+      }
+      
+      console.log(`✅ [ReEncodedConcat] Segment ${i + 1} validated: ${stats.size} bytes`);
+    }
+
+    // Create a temporary concat file list for FFmpeg concat demuxer
+    const concatListPath = path.join(path.dirname(segmentPaths[0]), 'concat_list_reencoded.txt');
+    const concatContent = segmentPaths.map(segmentPath => `file '${segmentPath}'`).join('\n');
+    
+    // Write concat list file
+    fs.writeFileSync(concatListPath, concatContent);
+    console.log(`📝 [ReEncodedConcat] Created concat list: ${concatListPath}`);
+    console.log(`📝 [ReEncodedConcat] Concat content:\n${concatContent}`);
+    
+    // Use re-encoding to ensure compatibility and include all segments
+    const ffmpegArgs = [
+      '-loglevel', 'warning',      // Reduce informational messages
+      '-f', 'concat',              // Use concat demuxer
+      '-safe', '0',                // Allow unsafe file paths
+      '-i', concatListPath,        // Input: concat list file
+      '-c:v', 'libx264',           // Re-encode video for consistency
+      '-c:a', 'aac',               // Re-encode audio for consistency
+      '-preset', 'fast',           // Fast encoding preset
+      '-crf', '23',                // Good quality setting
+      '-ac', '2',                  // Force stereo audio
+      '-ar', '44100',              // Force 44.1kHz sample rate
+      '-avoid_negative_ts', 'make_zero',  // Fix timestamp issues
+      '-fflags', '+genpts',        // Generate presentation timestamps
+      '-y',                        // Overwrite output
+      outputPath
+    ];
+
+    console.log('🔄 [ReEncodedConcat] Re-encoding FFmpeg command:', 'ffmpeg', ffmpegArgs.join(' '));
+    console.log(`🎯 [ReEncodedConcat] RE-ENCODING: Using libx264 + aac for guaranteed compatibility`);
+    console.log(`🎵 [ReEncodedConcat] AUDIO: Forcing stereo 44.1kHz for standardization`);
+    
+    const ffmpeg = spawn('ffmpeg', ffmpegArgs);
+    let errorOutput = '';
+    let hasProgress = false;
+    
+    ffmpeg.on('close', (code: number) => {
+      // Clean up concat list file
+      try {
+        if (fs.existsSync(concatListPath)) {
+          fs.unlinkSync(concatListPath);
+          console.log(`🧹 [ReEncodedConcat] Cleaned up concat list file: ${concatListPath}`);
+        }
+      } catch (cleanupError) {
+        console.warn(`⚠️ [ReEncodedConcat] Failed to cleanup concat list file: ${cleanupError}`);
+      }
+      
+      if (code === 0) {
+        // Verify output file was created and has content
+        if (fs.existsSync(outputPath)) {
+          const stats = fs.statSync(outputPath);
+          if (stats.size > 0) {
+            console.log(`✅ [ReEncodedConcat] Re-encoded concatenation completed successfully: ${stats.size} bytes`);
+            onProgress?.({ percent: 100, message: 'Re-encoded video concatenation complete!' });
+            resolve(outputPath);
+          } else {
+            const error = 'Generated video file is empty';
+            console.error(`❌ [ReEncodedConcat] ${error}`);
+            reject(new Error(error));
+          }
+        } else {
+          const error = 'Generated video file does not exist';
+          console.error(`❌ [ReEncodedConcat] ${error}`);
+          reject(new Error(error));
+        }
+      } else {
+        console.error(`❌ [ReEncodedConcat] FFmpeg failed with code: ${code}`);
+        console.error(`❌ [ReEncodedConcat] Error output: ${errorOutput}`);
+        reject(new Error(`FFmpeg process exited with code ${code}. Error: ${errorOutput}`));
+      }
+    });
+    
+    ffmpeg.on('error', (error: Error) => {
+      console.error('❌ [ReEncodedConcat] FFmpeg spawn error:', error);
+      reject(error);
+    });
+    
+    ffmpeg.stderr.on('data', (data: Buffer) => {
+      const output = data.toString();
+      errorOutput += output;
+      
+      // Filter out normal informational messages
+      const isNormalMessage = output.includes('Qavg:') || 
+                             output.includes('bitrate=') || 
+                             output.includes('speed=') ||
+                             output.includes('frame=') ||
+                             output.includes('fps=') ||
+                             output.includes('size=') ||
+                             output.includes('Input #') ||
+                             output.includes('Stream #') ||
+                             output.includes('Metadata:') ||
+                             output.includes('Duration:') ||
+                             output.includes('Stream mapping:') ||
+                             output.includes('Press [q]') ||
+                             output.includes('[libx264') ||
+                             output.includes('Output #') ||
+                             output.includes('encoder         :') ||
+                             output.includes('handler_name') ||
+                             output.includes('vendor_id') ||
+                             output.includes('compatible_brands') ||
+                             output.includes('major_brand') ||
+                             output.includes('minor_version') ||
+                             output.includes('Side data:') ||
+                             output.includes('cpb:') ||
+                             output.includes('vbv_delay') ||
+                             output.includes('muxing overhead') ||
+                             output.includes('kb/s:') ||
+                             output.includes('ref P L0:') ||
+                             output.includes('ref B L') ||
+                             output.includes('Weighted P-Frames') ||
+                             output.includes('consecutive B-frames') ||
+                             output.includes('transform intra') ||
+                             output.includes('coded y,uvDC') ||
+                             output.includes('mb I  I16') ||
+                             output.includes('mb P  I16') ||
+                             output.includes('mb B  I16') ||
+                             output.includes('i16 v,h,dc') ||
+                             output.includes('i8 v,h,dc') ||
+                             output.includes('i4 v,h,dc') ||
+                             output.includes('i8c dc,h,v');
+      
+      // Only log non-normal messages for debugging
+      if (!isNormalMessage) {
+        console.log('🔍 [ReEncodedConcat] FFmpeg stderr:', output);
+      }
+      
+      if (output.includes('time=') && !hasProgress) {
+        hasProgress = true;
+        const progressPercent = Math.min(90, Math.max(50, 70));
+        onProgress?.({ percent: progressPercent, message: 'Re-encoding and concatenating video segments...' });
+      }
+      
+      // Check for actual errors (not normal informational messages)
+      if ((output.includes('Error') || output.includes('error')) && !isNormalMessage) {
+        console.error('⚠️ [ReEncodedConcat] FFmpeg error detected:', output);
+      }
+    });
+    
+    ffmpeg.stdout.on('data', (data: Buffer) => {
+      console.log('📤 [ReEncodedConcat] FFmpeg stdout:', data.toString());
+    });
+  });
+}
+
+// Multi-segment slide transition - FIXED to handle all segments properly
 async function generateMultiSegmentSlideTransition(
   segmentPaths: string[],
   settings: VideoSettings,
   outputPath: string,
   onProgress?: (progress: { percent: number; message: string }) => void
 ): Promise<string> {
-  console.log('🎨 [MultiSlideTransition] Chaining multiple slide transitions');
-  
-  // For multiple segments, we'll process them in pairs
-  let currentOutput = segmentPaths[0];
-  const tempDir = path.dirname(segmentPaths[0]);
-  
-  for (let i = 1; i < segmentPaths.length; i++) {
-    const tempOutput = path.join(tempDir, `temp_slide_${i}.mp4`);
-    const isLastSegment = i === segmentPaths.length - 1;
-    const finalOutput = isLastSegment ? outputPath : tempOutput;
+  return new Promise(async (resolve, reject) => {
+    console.log('🎨 [MultiSlideTransition] FIXED: Building unified complex filter for all segments');
     
-    onProgress?.({ 
-      percent: (i / segmentPaths.length) * 100, 
-      message: `Applying slide transition ${i}/${segmentPaths.length - 1}...` 
-    });
+    const duration = settings.transitionDuration || 1;
+    const numSegments = segmentPaths.length;
     
-    await generateTwoSegmentSlideTransition(
-      [currentOutput, segmentPaths[i]], 
-      settings, 
-      finalOutput,
-      onProgress
-    );
-    
-    // Clean up previous temp file (but not the original segments)
-    if (i > 1 && currentOutput.includes('temp_slide_')) {
+    // For 2 segments, use the proper two-segment slide transition function
+    if (numSegments === 2) {
+      console.log('🎨 [MultiSlideTransition] 2 segments detected, using proper two-segment transition');
       try {
-        fs.unlinkSync(currentOutput);
-      } catch (e) {
-        console.warn('⚠️ [MultiSlideTransition] Could not clean up temp file:', e);
+        const result = await generateTwoSegmentSlideTransition(segmentPaths, settings, outputPath, onProgress);
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+      return;
+    }
+
+    console.log(`🎨 [MultiSlideTransition] FIXED: Processing ${numSegments} segments with unified approach`);
+    
+    // Get durations of all segments first
+    const segmentDurations: number[] = [];
+    let totalProcessed = 0;
+    
+    for (const segmentPath of segmentPaths) {
+      try {
+        const { spawn } = require('child_process');
+        const ffprobeArgs = ['-v', 'quiet', '-show_entries', 'format=duration', '-of', 'csv=p=0', segmentPath];
+        
+        const duration = await new Promise<number>((resolveDuration, rejectDuration) => {
+          const ffprobe = spawn('ffprobe', ffprobeArgs);
+          let durationStr = '';
+          
+          ffprobe.stdout.on('data', (data: Buffer) => {
+            durationStr += data.toString().trim();
+          });
+          
+          ffprobe.on('close', (code: number) => {
+            if (code === 0 && durationStr) {
+              resolveDuration(parseFloat(durationStr));
+            } else {
+              rejectDuration(new Error(`Could not get duration for ${segmentPath}`));
+            }
+          });
+          
+          ffprobe.on('error', rejectDuration);
+        });
+        
+        segmentDurations.push(duration);
+        totalProcessed++;
+        
+        onProgress?.({ 
+          percent: (totalProcessed / numSegments) * 20, 
+          message: `Analyzing segment ${totalProcessed}/${numSegments}...` 
+        });
+        
+      } catch (error) {
+        console.warn(`⚠️ [MultiSlideTransition] Could not get duration for ${segmentPath}, falling back to concatenation`);
+        const result = await generateReEncodedConcatenation(segmentPaths, outputPath, onProgress);
+        resolve(result);
+        return;
       }
     }
     
-    currentOutput = finalOutput;
-  }
-  
-  return outputPath;
+    console.log('📏 [MultiSlideTransition] Segment durations:', segmentDurations);
+    
+    // Build unified complex filter for all segments
+    const videoFilters: string[] = [];
+    const audioInputs: string[] = [];
+    
+    // Calculate cumulative offsets for transitions
+    let cumulativeOffset = 0;
+    
+    // Build video transition chain
+    let currentVideoLabel = '[0:v]';
+    
+    for (let i = 1; i < numSegments; i++) {
+      const prevDuration = segmentDurations[i - 1];
+      const offset = Math.max(0, cumulativeOffset + prevDuration - duration);
+      
+      const nextVideoLabel = i === numSegments - 1 ? '[v]' : `[v${i}]`;
+      
+      videoFilters.push(
+        `${currentVideoLabel}[${i}:v]xfade=transition=slideleft:duration=${duration}:offset=${offset}${nextVideoLabel}`
+      );
+      
+      currentVideoLabel = nextVideoLabel;
+      cumulativeOffset += prevDuration - duration; // Account for overlap
+      
+      console.log(`🎨 [MultiSlideTransition] Transition ${i}: offset=${offset}s, duration=${duration}s`);
+    }
+    
+    // FIXED: Build synchronized audio that matches video transition timing
+    const audioFilters: string[] = [];
+    let audioOffset = 0;
+    
+    // First audio segment starts at time 0
+    audioFilters.push(`[0:a]adelay=0[a0]`);
+    
+    // Calculate audio delays to match video transition timing
+    for (let i = 1; i < numSegments; i++) {
+      const prevDuration = segmentDurations[i - 1];
+      // Audio should start when the video transition begins (accounting for overlap)
+      audioOffset += prevDuration - duration; // Subtract transition duration for overlap
+      const audioDelayMs = Math.max(0, audioOffset * 1000); // Convert to milliseconds
+      
+      audioFilters.push(`[${i}:a]adelay=${audioDelayMs}[a${i}]`);
+      console.log(`🎵 [MultiSlideTransition] Audio ${i}: delay=${audioDelayMs}ms (${audioOffset}s)`);
+    }
+    
+    // Mix all delayed audio streams
+    const delayedAudioInputs = Array.from({ length: numSegments }, (_, i) => `[a${i}]`).join('');
+    const audioMixFilter = `${delayedAudioInputs}amix=inputs=${numSegments}:duration=longest[a]`;
+    
+    const videoFilterChain = videoFilters.join(';');
+    const audioFilterChain = `${audioFilters.join(';')};${audioMixFilter}`;
+    const complexFilter = `${videoFilterChain};${audioFilterChain}`;
+    
+    console.log(`🎨 [MultiSlideTransition] UNIFIED Complex filter: ${complexFilter}`);
+    
+    const { spawn } = require('child_process');
+    const ffmpegArgs = [
+      ...segmentPaths.flatMap(path => ['-i', path]),
+      '-filter_complex', complexFilter,
+      '-map', '[v]',
+      '-map', '[a]',
+      '-c:v', 'libx264',
+      '-c:a', 'aac',
+      '-preset', 'fast',
+      '-pix_fmt', 'yuv420p',
+      '-avoid_negative_ts', 'make_zero',
+      '-fflags', '+genpts',
+      '-y',
+      outputPath
+    ];
+
+    console.log('🎨 [MultiSlideTransition] UNIFIED FFmpeg command:', 'ffmpeg', ffmpegArgs.join(' '));
+    
+    const ffmpeg = spawn('ffmpeg', ffmpegArgs);
+    let hasProgress = false;
+    let errorOutput = '';
+    
+    ffmpeg.on('close', (code: number) => {
+      if (code === 0) {
+        console.log('✅ [MultiSlideTransition] FIXED: Multi-segment slide transition completed successfully');
+        onProgress?.({ percent: 100, message: 'Multi-segment slide transition complete!' });
+        resolve(outputPath);
+      } else {
+        console.error('❌ [MultiSlideTransition] FFmpeg failed with code:', code);
+        console.error('❌ [MultiSlideTransition] Error output:', errorOutput);
+        // Fall back to re-encoded concatenation
+        console.log('🔄 [MultiSlideTransition] Falling back to re-encoded concatenation');
+        generateReEncodedConcatenation(segmentPaths, outputPath, onProgress)
+          .then(resolve)
+          .catch(reject);
+      }
+    });
+    
+    ffmpeg.on('error', (error: Error) => {
+      console.error('❌ [MultiSlideTransition] FFmpeg spawn error:', error);
+      // Fall back to re-encoded concatenation
+      generateReEncodedConcatenation(segmentPaths, outputPath, onProgress)
+        .then(resolve)
+        .catch(reject);
+    });
+    
+    ffmpeg.stderr.on('data', (data: Buffer) => {
+      const output = data.toString();
+      errorOutput += output;
+      
+      if (output.includes('time=') && !hasProgress) {
+        hasProgress = true;
+        onProgress?.({ percent: 70, message: 'Applying unified multi-segment slide transitions...' });
+      }
+      
+      // Check for actual errors
+      if (output.includes('Error') || output.includes('error')) {
+        console.error('⚠️ [MultiSlideTransition] FFmpeg error detected:', output);
+      }
+    });
+  });
 }
 
-// Multi-segment zoom transition (chain multiple zoom transitions)
+// Multi-segment zoom transition - FIXED to handle all segments properly
 async function generateMultiSegmentZoomTransition(
   segmentPaths: string[],
   settings: VideoSettings,
   outputPath: string,
   onProgress?: (progress: { percent: number; message: string }) => void
 ): Promise<string> {
-  console.log('🎨 [MultiZoomTransition] Chaining multiple zoom transitions');
-  
-  // For multiple segments, we'll process them in pairs
-  let currentOutput = segmentPaths[0];
-  const tempDir = path.dirname(segmentPaths[0]);
-  
-  for (let i = 1; i < segmentPaths.length; i++) {
-    const tempOutput = path.join(tempDir, `temp_zoom_${i}.mp4`);
-    const isLastSegment = i === segmentPaths.length - 1;
-    const finalOutput = isLastSegment ? outputPath : tempOutput;
+  return new Promise(async (resolve, reject) => {
+    console.log('🎨 [MultiZoomTransition] FIXED: Building unified complex filter for all segments');
     
-    onProgress?.({ 
-      percent: (i / segmentPaths.length) * 100, 
-      message: `Applying zoom transition ${i}/${segmentPaths.length - 1}...` 
-    });
+    const duration = settings.transitionDuration || 1;
+    const numSegments = segmentPaths.length;
     
-    await generateTwoSegmentZoomTransition(
-      [currentOutput, segmentPaths[i]], 
-      settings, 
-      finalOutput,
-      onProgress
-    );
-    
-    // Clean up previous temp file (but not the original segments)
-    if (i > 1 && currentOutput.includes('temp_zoom_')) {
+    // For 2 segments, use the proper two-segment zoom transition function
+    if (numSegments === 2) {
+      console.log('🎨 [MultiZoomTransition] 2 segments detected, using proper two-segment transition');
       try {
-        fs.unlinkSync(currentOutput);
-      } catch (e) {
-        console.warn('⚠️ [MultiZoomTransition] Could not clean up temp file:', e);
+        const result = await generateTwoSegmentZoomTransition(segmentPaths, settings, outputPath, onProgress);
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+      return;
+    }
+
+    console.log(`🎨 [MultiZoomTransition] FIXED: Processing ${numSegments} segments with unified approach`);
+    
+    // Get durations of all segments first
+    const segmentDurations: number[] = [];
+    let totalProcessed = 0;
+    
+    for (const segmentPath of segmentPaths) {
+      try {
+        const { spawn } = require('child_process');
+        const ffprobeArgs = ['-v', 'quiet', '-show_entries', 'format=duration', '-of', 'csv=p=0', segmentPath];
+        
+        const duration = await new Promise<number>((resolveDuration, rejectDuration) => {
+          const ffprobe = spawn('ffprobe', ffprobeArgs);
+          let durationStr = '';
+          
+          ffprobe.stdout.on('data', (data: Buffer) => {
+            durationStr += data.toString().trim();
+          });
+          
+          ffprobe.on('close', (code: number) => {
+            if (code === 0 && durationStr) {
+              resolveDuration(parseFloat(durationStr));
+            } else {
+              rejectDuration(new Error(`Could not get duration for ${segmentPath}`));
+            }
+          });
+          
+          ffprobe.on('error', rejectDuration);
+        });
+        
+        segmentDurations.push(duration);
+        totalProcessed++;
+        
+        onProgress?.({ 
+          percent: (totalProcessed / numSegments) * 20, 
+          message: `Analyzing segment ${totalProcessed}/${numSegments}...` 
+        });
+        
+      } catch (error) {
+        console.warn(`⚠️ [MultiZoomTransition] Could not get duration for ${segmentPath}, falling back to concatenation`);
+        const result = await generateReEncodedConcatenation(segmentPaths, outputPath, onProgress);
+        resolve(result);
+        return;
       }
     }
     
-    currentOutput = finalOutput;
-  }
-  
-  return outputPath;
+    console.log('📏 [MultiZoomTransition] Segment durations:', segmentDurations);
+    
+    // Build unified complex filter for all segments
+    const videoFilters: string[] = [];
+    const audioInputs: string[] = [];
+    
+    // Calculate cumulative offsets for transitions
+    let cumulativeOffset = 0;
+    
+    // Build video transition chain
+    let currentVideoLabel = '[0:v]';
+    
+    for (let i = 1; i < numSegments; i++) {
+      const prevDuration = segmentDurations[i - 1];
+      const offset = Math.max(0, cumulativeOffset + prevDuration - duration);
+      
+      const nextVideoLabel = i === numSegments - 1 ? '[v]' : `[v${i}]`;
+      
+      videoFilters.push(
+        `${currentVideoLabel}[${i}:v]xfade=transition=zoomin:duration=${duration}:offset=${offset}${nextVideoLabel}`
+      );
+      
+      currentVideoLabel = nextVideoLabel;
+      cumulativeOffset += prevDuration - duration; // Account for overlap
+      
+      console.log(`🎨 [MultiZoomTransition] Transition ${i}: offset=${offset}s, duration=${duration}s`);
+    }
+    
+    // FIXED: Build synchronized audio that matches video transition timing
+    const audioFilters: string[] = [];
+    let audioOffset = 0;
+    
+    // First audio segment starts at time 0
+    audioFilters.push(`[0:a]adelay=0[a0]`);
+    
+    // Calculate audio delays to match video transition timing
+    for (let i = 1; i < numSegments; i++) {
+      const prevDuration = segmentDurations[i - 1];
+      // Audio should start when the video transition begins (accounting for overlap)
+      audioOffset += prevDuration - duration; // Subtract transition duration for overlap
+      const audioDelayMs = Math.max(0, audioOffset * 1000); // Convert to milliseconds
+      
+      audioFilters.push(`[${i}:a]adelay=${audioDelayMs}[a${i}]`);
+      console.log(`🎵 [MultiZoomTransition] Audio ${i}: delay=${audioDelayMs}ms (${audioOffset}s)`);
+    }
+    
+    // Mix all delayed audio streams
+    const delayedAudioInputs = Array.from({ length: numSegments }, (_, i) => `[a${i}]`).join('');
+    const audioMixFilter = `${delayedAudioInputs}amix=inputs=${numSegments}:duration=longest[a]`;
+    
+    const videoFilterChain = videoFilters.join(';');
+    const audioFilterChain = `${audioFilters.join(';')};${audioMixFilter}`;
+    const complexFilter = `${videoFilterChain};${audioFilterChain}`;
+    
+    console.log(`🎨 [MultiZoomTransition] UNIFIED Complex filter: ${complexFilter}`);
+    
+    const { spawn } = require('child_process');
+    const ffmpegArgs = [
+      ...segmentPaths.flatMap(path => ['-i', path]),
+      '-filter_complex', complexFilter,
+      '-map', '[v]',
+      '-map', '[a]',
+      '-c:v', 'libx264',
+      '-c:a', 'aac',
+      '-preset', 'fast',
+      '-pix_fmt', 'yuv420p',
+      '-avoid_negative_ts', 'make_zero',
+      '-fflags', '+genpts',
+      '-y',
+      outputPath
+    ];
+
+    console.log('🎨 [MultiZoomTransition] UNIFIED FFmpeg command:', 'ffmpeg', ffmpegArgs.join(' '));
+    
+    const ffmpeg = spawn('ffmpeg', ffmpegArgs);
+    let hasProgress = false;
+    let errorOutput = '';
+    
+    ffmpeg.on('close', (code: number) => {
+      if (code === 0) {
+        console.log('✅ [MultiZoomTransition] FIXED: Multi-segment zoom transition completed successfully');
+        onProgress?.({ percent: 100, message: 'Multi-segment zoom transition complete!' });
+        resolve(outputPath);
+      } else {
+        console.error('❌ [MultiZoomTransition] FFmpeg failed with code:', code);
+        console.error('❌ [MultiZoomTransition] Error output:', errorOutput);
+        // Fall back to re-encoded concatenation
+        console.log('🔄 [MultiZoomTransition] Falling back to re-encoded concatenation');
+        generateReEncodedConcatenation(segmentPaths, outputPath, onProgress)
+          .then(resolve)
+          .catch(reject);
+      }
+    });
+    
+    ffmpeg.on('error', (error: Error) => {
+      console.error('❌ [MultiZoomTransition] FFmpeg spawn error:', error);
+      // Fall back to re-encoded concatenation
+      generateReEncodedConcatenation(segmentPaths, outputPath, onProgress)
+        .then(resolve)
+        .catch(reject);
+    });
+    
+    ffmpeg.stderr.on('data', (data: Buffer) => {
+      const output = data.toString();
+      errorOutput += output;
+      
+      if (output.includes('time=') && !hasProgress) {
+        hasProgress = true;
+        onProgress?.({ percent: 70, message: 'Applying unified multi-segment zoom transitions...' });
+      }
+      
+      // Check for actual errors
+      if (output.includes('Error') || output.includes('error')) {
+        console.error('⚠️ [MultiZoomTransition] FFmpeg error detected:', output);
+      }
+    });
+  });
 }
 
 // Get resolution dimensions
