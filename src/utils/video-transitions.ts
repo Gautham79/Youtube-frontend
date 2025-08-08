@@ -156,14 +156,14 @@ async function generateTwoSegmentFadeTransition(
       
       console.log(`🎨 [FadeTransition] Using offset: ${offset}s, duration: ${duration}s`);
       
-      // FIXED: Properly concatenate audio streams to preserve all scenes
+      // FIXED: Separate video and audio processing to maintain consistent audio levels
       const ffmpegArgs = [
         '-i', segmentPaths[0],
         '-i', segmentPaths[1],
         '-filter_complex', 
         `[0:v][1:v]xfade=transition=fade:duration=${duration}:offset=${offset}[v];[0:a][1:a]concat=n=2:v=0:a=1[a]`,
         '-map', '[v]',
-        '-map', '[a]',  // Use concatenated audio stream
+        '-map', '[a]',  // Use concatenated audio stream (no crossfading)
         '-c:v', 'libx264',
         '-c:a', 'aac',  // Re-encode audio to ensure compatibility
         '-preset', 'fast',
@@ -171,6 +171,8 @@ async function generateTwoSegmentFadeTransition(
         '-y',
         outputPath
       ];
+      
+      console.log(`🎵 [FadeTransition] FIXED: Video crossfade with audio concatenation (no audio fading)`);
 
       console.log('🎨 [FadeTransition] FFmpeg command:', 'ffmpeg', ffmpegArgs.join(' '));
       
@@ -367,14 +369,14 @@ async function generateTwoSegmentSlideTransition(
       
       console.log(`🎨 [SlideTransition] Using offset: ${offset}s, duration: ${duration}s`);
       
-      // FIXED: Properly concatenate audio streams to preserve all scenes
+      // FIXED: Separate video and audio processing to maintain consistent audio levels
       const ffmpegArgs = [
         '-i', segmentPaths[0],
         '-i', segmentPaths[1],
         '-filter_complex', 
         `[0:v][1:v]xfade=transition=slideleft:duration=${duration}:offset=${offset}[v];[0:a][1:a]concat=n=2:v=0:a=1[a]`,
         '-map', '[v]',
-        '-map', '[a]',  // Use concatenated audio stream
+        '-map', '[a]',  // Use concatenated audio stream (no crossfading)
         '-c:v', 'libx264',
         '-c:a', 'aac',  // Re-encode audio to ensure compatibility
         '-preset', 'fast',
@@ -382,6 +384,8 @@ async function generateTwoSegmentSlideTransition(
         '-y',
         outputPath
       ];
+      
+      console.log(`🎵 [SlideTransition] FIXED: Video slide with audio concatenation (no audio fading)`);
 
       console.log('🎨 [SlideTransition] FFmpeg command:', 'ffmpeg', ffmpegArgs.join(' '));
       
@@ -470,14 +474,14 @@ async function generateTwoSegmentZoomTransition(
       
       console.log(`🎨 [ZoomTransition] Using offset: ${offset}s, duration: ${duration}s`);
       
-      // FIXED: Properly concatenate audio streams to preserve all scenes
+      // FIXED: Separate video and audio processing to maintain consistent audio levels
       const ffmpegArgs = [
         '-i', segmentPaths[0],
         '-i', segmentPaths[1],
         '-filter_complex', 
         `[0:v][1:v]xfade=transition=zoomin:duration=${duration}:offset=${offset}[v];[0:a][1:a]concat=n=2:v=0:a=1[a]`,
         '-map', '[v]',
-        '-map', '[a]',  // Use concatenated audio stream
+        '-map', '[a]',  // Use concatenated audio stream (no crossfading)
         '-c:v', 'libx264',
         '-c:a', 'aac',  // Re-encode audio to ensure compatibility
         '-preset', 'fast',
@@ -485,6 +489,8 @@ async function generateTwoSegmentZoomTransition(
         '-y',
         outputPath
       ];
+      
+      console.log(`🎵 [ZoomTransition] FIXED: Video zoom with audio concatenation (no audio fading)`);
 
       console.log('🎨 [ZoomTransition] FFmpeg command:', 'ffmpeg', ffmpegArgs.join(' '));
       
@@ -609,7 +615,6 @@ async function generateMultiSegmentFadeTransition(
     
     // Build unified complex filter for all segments
     const videoFilters: string[] = [];
-    const audioInputs: string[] = [];
     
     // Calculate cumulative offsets for transitions
     let cumulativeOffset = 0;
@@ -633,31 +638,17 @@ async function generateMultiSegmentFadeTransition(
       console.log(`🎨 [MultiFadeTransition] Transition ${i}: offset=${offset}s, duration=${duration}s`);
     }
     
-    // FIXED: Build synchronized audio that matches video transition timing
-    const audioFilters: string[] = [];
-    let audioOffset = 0;
+    // CLEAN AUDIO: Use simple concatenation instead of complex mixing
+    console.log(`🎵 [MultiFadeTransition] CLEAN AUDIO: Using simple concatenation for clean audio`);
     
-    // First audio segment starts at time 0
-    audioFilters.push(`[0:a]adelay=0[a0]`);
+    // Simple audio concatenation - no delays, no mixing, no complex processing
+    const audioInputsStr = Array.from({ length: numSegments }, (_, i) => `[${i}:a]`).join('');
+    const audioFilter = `${audioInputsStr}concat=n=${numSegments}:v=0:a=1[a]`;
     
-    // Calculate audio delays to match video transition timing
-    for (let i = 1; i < numSegments; i++) {
-      const prevDuration = segmentDurations[i - 1];
-      // Audio should start when the video transition begins (accounting for overlap)
-      audioOffset += prevDuration - duration; // Subtract transition duration for overlap
-      const audioDelayMs = Math.max(0, audioOffset * 1000); // Convert to milliseconds
-      
-      audioFilters.push(`[${i}:a]adelay=${audioDelayMs}[a${i}]`);
-      console.log(`🎵 [MultiFadeTransition] Audio ${i}: delay=${audioDelayMs}ms (${audioOffset}s)`);
-    }
-    
-    // Mix all delayed audio streams
-    const delayedAudioInputs = Array.from({ length: numSegments }, (_, i) => `[a${i}]`).join('');
-    const audioMixFilter = `${delayedAudioInputs}amix=inputs=${numSegments}:duration=longest[a]`;
+    console.log(`🎵 [MultiFadeTransition] CLEAN AUDIO: Simple concat filter for clean audio: ${audioFilter}`);
     
     const videoFilterChain = videoFilters.join(';');
-    const audioFilterChain = `${audioFilters.join(';')};${audioMixFilter}`;
-    const complexFilter = `${videoFilterChain};${audioFilterChain}`;
+    const complexFilter = `${videoFilterChain};${audioFilter}`;
     
     console.log(`🎨 [MultiFadeTransition] UNIFIED Complex filter: ${complexFilter}`);
     
@@ -996,31 +987,17 @@ async function generateMultiSegmentSlideTransition(
       console.log(`🎨 [MultiSlideTransition] Transition ${i}: offset=${offset}s, duration=${duration}s`);
     }
     
-    // FIXED: Build synchronized audio that matches video transition timing
-    const audioFilters: string[] = [];
-    let audioOffset = 0;
+    // CLEAN AUDIO: Use simple concatenation instead of complex mixing (SAME AS FADE)
+    console.log(`🎵 [MultiSlideTransition] CLEAN AUDIO: Using simple concatenation for clean audio (same as fade)`);
     
-    // First audio segment starts at time 0
-    audioFilters.push(`[0:a]adelay=0[a0]`);
+    // Simple audio concatenation - no delays, no mixing, no complex processing
+    const audioInputsStr = Array.from({ length: numSegments }, (_, i) => `[${i}:a]`).join('');
+    const audioFilter = `${audioInputsStr}concat=n=${numSegments}:v=0:a=1[a]`;
     
-    // Calculate audio delays to match video transition timing
-    for (let i = 1; i < numSegments; i++) {
-      const prevDuration = segmentDurations[i - 1];
-      // Audio should start when the video transition begins (accounting for overlap)
-      audioOffset += prevDuration - duration; // Subtract transition duration for overlap
-      const audioDelayMs = Math.max(0, audioOffset * 1000); // Convert to milliseconds
-      
-      audioFilters.push(`[${i}:a]adelay=${audioDelayMs}[a${i}]`);
-      console.log(`🎵 [MultiSlideTransition] Audio ${i}: delay=${audioDelayMs}ms (${audioOffset}s)`);
-    }
-    
-    // Mix all delayed audio streams
-    const delayedAudioInputs = Array.from({ length: numSegments }, (_, i) => `[a${i}]`).join('');
-    const audioMixFilter = `${delayedAudioInputs}amix=inputs=${numSegments}:duration=longest[a]`;
+    console.log(`🎵 [MultiSlideTransition] CLEAN AUDIO: Simple concat filter for clean audio: ${audioFilter}`);
     
     const videoFilterChain = videoFilters.join(';');
-    const audioFilterChain = `${audioFilters.join(';')};${audioMixFilter}`;
-    const complexFilter = `${videoFilterChain};${audioFilterChain}`;
+    const complexFilter = `${videoFilterChain};${audioFilter}`;
     
     console.log(`🎨 [MultiSlideTransition] UNIFIED Complex filter: ${complexFilter}`);
     
@@ -1186,31 +1163,17 @@ async function generateMultiSegmentZoomTransition(
       console.log(`🎨 [MultiZoomTransition] Transition ${i}: offset=${offset}s, duration=${duration}s`);
     }
     
-    // FIXED: Build synchronized audio that matches video transition timing
-    const audioFilters: string[] = [];
-    let audioOffset = 0;
+    // CLEAN AUDIO: Use simple concatenation instead of complex mixing (SAME AS FADE AND SLIDE)
+    console.log(`🎵 [MultiZoomTransition] CLEAN AUDIO: Using simple concatenation for clean audio (same as fade and slide)`);
     
-    // First audio segment starts at time 0
-    audioFilters.push(`[0:a]adelay=0[a0]`);
+    // Simple audio concatenation - no delays, no mixing, no complex processing
+    const audioInputsStr = Array.from({ length: numSegments }, (_, i) => `[${i}:a]`).join('');
+    const audioFilter = `${audioInputsStr}concat=n=${numSegments}:v=0:a=1[a]`;
     
-    // Calculate audio delays to match video transition timing
-    for (let i = 1; i < numSegments; i++) {
-      const prevDuration = segmentDurations[i - 1];
-      // Audio should start when the video transition begins (accounting for overlap)
-      audioOffset += prevDuration - duration; // Subtract transition duration for overlap
-      const audioDelayMs = Math.max(0, audioOffset * 1000); // Convert to milliseconds
-      
-      audioFilters.push(`[${i}:a]adelay=${audioDelayMs}[a${i}]`);
-      console.log(`🎵 [MultiZoomTransition] Audio ${i}: delay=${audioDelayMs}ms (${audioOffset}s)`);
-    }
-    
-    // Mix all delayed audio streams
-    const delayedAudioInputs = Array.from({ length: numSegments }, (_, i) => `[a${i}]`).join('');
-    const audioMixFilter = `${delayedAudioInputs}amix=inputs=${numSegments}:duration=longest[a]`;
+    console.log(`🎵 [MultiZoomTransition] CLEAN AUDIO: Simple concat filter for clean audio: ${audioFilter}`);
     
     const videoFilterChain = videoFilters.join(';');
-    const audioFilterChain = `${audioFilters.join(';')};${audioMixFilter}`;
-    const complexFilter = `${videoFilterChain};${audioFilterChain}`;
+    const complexFilter = `${videoFilterChain};${audioFilter}`;
     
     console.log(`🎨 [MultiZoomTransition] UNIFIED Complex filter: ${complexFilter}`);
     

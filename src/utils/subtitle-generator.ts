@@ -583,13 +583,14 @@ export function generateDrawTextFilter(
     console.log(`📱 [Subtitles] Portrait mode: adjusting font size from ${style.fontSize} to ${adjustedFontSize}`);
   }
 
-  // FIXED TIMING: Match the corrected audio synchronization from video-generation-v2.ts
-  // Audio starts immediately (no delay), subtitles should be perfectly synchronized
+  // FIXED TIMING: Apply delay from settings to match audio delay for transitions
+  // Use the delay setting to synchronize with delayed audio
   
-  // Audio starts at the beginning of the scene (no delay) - matches video-generation-v2.ts fix
-  const audioStartTime = 0;
+  // Audio starts with delay (from transition duration)
+  const audioDelay = settings.delay || 0;
+  const audioStartTime = audioDelay;
   
-  // Subtitle appears slightly before audio for reading time, but starts immediately if no room
+  // Subtitle appears slightly before audio for reading time, but respects the delay
   const subtitleEarlyStart = 0.3; // Reduced from 0.5s to 0.3s for tighter sync
   const subtitleStartTime = Math.max(0, audioStartTime - subtitleEarlyStart);
   

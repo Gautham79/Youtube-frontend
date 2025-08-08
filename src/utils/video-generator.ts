@@ -185,9 +185,16 @@ async function createVideoSegment(
   const { width, height } = getResolutionDimensions(settings.resolution, settings.orientation);
   const { crf, preset } = getQualitySettings(settings.quality);
 
-  // Use same duration for both audio and video (no extension)
-  const extendedDuration = duration;
-  console.log(`🎬 [Segment] Using equal duration for audio and video: ${duration}s`);
+  // Extend duration by transition duration when transitions are enabled
+  const transitionDuration = (settings.transition && settings.transition !== 'none') ? (settings.transitionDuration || 0) : 0;
+  const extendedDuration = duration + (transitionDuration*2);
+  
+  console.log(`🎬 [Segment] Duration calculation:`, {
+    originalDuration: duration,
+    transitionDuration: transitionDuration,
+    extendedDuration: extendedDuration,
+    transitionEnabled: settings.transition !== 'none'
+  });
 
   console.log(`🎬 [Segment] Creating COMPLETE video segment ${sceneIndex + 1}:`, {
     image: imagePath,
@@ -219,12 +226,18 @@ async function createVideoSegment(
   }
 
   // 1.3: Apply SUBTITLES (burned into video) - SECOND
-  // Keep subtitles using original duration for proper timing
+  // Delay subtitles by transition duration to match audio delay
   const subtitleSettings = settings.subtitles || getDefaultSubtitleSettings();
   if (subtitleSettings.enabled && narration) {
+    // Create modified subtitle settings with delay
+    const delayedSubtitleSettings = {
+      ...subtitleSettings,
+      delay: transitionDuration // Add transition duration as delay
+    };
+    
     const subtitleFilter = generateDrawTextFilter(
       narration,
-      subtitleSettings,
+      delayedSubtitleSettings,
       width,
       height,
       duration, // Use original duration for subtitle timing
@@ -235,7 +248,7 @@ async function createVideoSegment(
     );
     if (subtitleFilter) {
       videoFilters.push(subtitleFilter);
-      console.log(`📝 [Segment] Applied subtitles: "${narration.substring(0, 50)}..." (timed for ${duration}s)`);
+      console.log(`📝 [Segment] Applied subtitles with ${transitionDuration}s delay: "${narration.substring(0, 50)}..." (timed for ${duration}s)`);
     }
   }
 
@@ -259,21 +272,67 @@ async function createVideoSegment(
     .videoFilter(finalVideoFilter)
     .overwrite();
 
-  // CRITICAL: Pad audio with silence to exact scene duration
-  command.audioFilter(`apad=whole_dur=${duration}`);
+  // CRITICAL: Apply audio processing based on scene position to prevent first scene garbling
+  const audioDelayMs = transitionDuration * 1000; // Convert to milliseconds
   
-  // Use exact duration for both streams
-  command.duration(duration);
+  // Build audio filter chain - SPECIAL HANDLING FOR FIRST SCENE
+  const audioFilters: string[] = [];
+  
+  if (sceneIndex === 0 && (settings.transition === 'none' || !settings.transition)) {
+    // FIRST SCENE WITH NO TRANSITIONS: Minimal processing
+    console.log(`🎵 [Segment] FIRST SCENE (NO TRANSITIONS): Using minimal audio processing`);
+    
+    // Only basic format standardization for first scene
+    audioFilters.push('aformat=sample_rates=44100:channel_layouts=stereo');
+    audioFilters.push(`apad=whole_dur=${extendedDuration}`);
+    
+    console.log(`🎵 [Segment] FIRST SCENE (NO TRANSITIONS): Minimal filter chain`);
+  } else if (sceneIndex === 0 && settings.transition && settings.transition !== 'none') {
+    // FIRST SCENE WITH TRANSITIONS: IDENTICAL TO NO TRANSITIONS CASE
+    console.log(`🎵 [Segment] FIRST SCENE (WITH TRANSITIONS): Using IDENTICAL processing to no-transitions case`);
+    
+    // Use EXACTLY the same processing as the no-transitions case
+    audioFilters.push('aformat=sample_rates=44100:channel_layouts=stereo');
+    audioFilters.push(`apad=whole_dur=${extendedDuration}`);
+    
+    console.log(`🎵 [Segment] FIRST SCENE (WITH TRANSITIONS): IDENTICAL processing to prevent any differences`);
+  } else {
+    // OTHER SCENES: Format standardization and normalization (RESTORE NORMALIZATION)
+    console.log(`🎵 [Segment] SCENE ${sceneIndex + 1}: Using format standardization + normalization`);
+    
+    // 1. Audio format standardization and normalization
+    audioFilters.push('aformat=sample_rates=44100:channel_layouts=stereo'); // Standardize format
+    audioFilters.push('loudnorm=I=-16:TP=-1.5:LRA=11'); // Professional loudness normalization
+    
+    // 2. Apply transition delay if needed
+    if (transitionDuration > 0) {
+      audioFilters.push(`adelay=${audioDelayMs}|${audioDelayMs}`);
+      console.log(`🎵 [Segment] AUDIO DELAY: ${audioDelayMs}ms (${transitionDuration}s) for transition timing`);
+    }
+    
+    // 3. Pad to extended duration
+    audioFilters.push(`apad=whole_dur=${extendedDuration}`);
+    
+    console.log(`🎵 [Segment] FULL NORMALIZATION: Applied aformat + loudnorm for consistent levels (FIRST SCENE EXCLUDED)`);
+  }
+  
+  // Apply the audio filter chain
+  command.audioFilter(audioFilters.join(','));
+  
+  console.log(`🎵 [Segment] Audio filter chain for scene ${sceneIndex + 1}: ${audioFilters.join(',')}`);
+  
+  // Use extended duration for both streams when transitions are enabled
+  command.duration(extendedDuration);
   
   // ENSURE EXACT TIMING WITH PADDING
-  command.outputOption('-t', duration.toString()); // Force output duration
+  command.outputOption('-t', extendedDuration.toString()); // Force output duration to extended duration
   command.outputOption('-avoid_negative_ts', 'make_zero'); // Ensure no negative timestamps
   command.outputOption('-fflags', '+genpts'); // Generate presentation timestamps
   
-  console.log(`🎵 [Segment] AUDIO: Duration=${duration}s (padded with silence if needed)`);
-  console.log(`🎬 [Segment] VIDEO: Duration=${extendedDuration}s (same as audio)`);
-  console.log(`✅ [Segment] EQUAL DURATIONS: Audio and video both ${duration}s`);
-  console.log(`🔇 [Segment] AUDIO PADDING: Using apad=whole_dur=${duration} for exact timing`);
+  console.log(`🎵 [Segment] AUDIO: Duration=${extendedDuration}s (padded with silence for transitions)`);
+  console.log(`🎬 [Segment] VIDEO: Duration=${extendedDuration}s (extended for smooth transitions)`);
+  console.log(`✅ [Segment] EXTENDED DURATIONS: Audio and video both ${extendedDuration}s`);
+  console.log(`🔇 [Segment] AUDIO PADDING: Using apad=whole_dur=${extendedDuration} for transition compatibility`);
   console.log(`🎯 [Segment] PROCESSING ORDER: Image → Effects → Subtitles → Audio Padding → Complete Segment`);
   console.log(`🔧 [Segment] TIMING FIX: Audio padded with silence to prevent advance issues`);
 
