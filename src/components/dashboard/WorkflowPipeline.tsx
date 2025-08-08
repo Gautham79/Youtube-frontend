@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -27,31 +28,46 @@ interface WorkflowStep {
 }
 
 export default function WorkflowPipeline() {
-  // Mock data - in real app, this would come from props or API
-  const steps: WorkflowStep[] = [
+  const [workflowProgress, setWorkflowProgress] = useState<Record<number, string>>({});
+
+  // Load workflow progress from localStorage on component mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedProgress = localStorage.getItem('workflow-progress');
+      if (savedProgress) {
+        try {
+          setWorkflowProgress(JSON.parse(savedProgress));
+        } catch (error) {
+          console.error('Error parsing workflow progress:', error);
+        }
+      }
+    }
+  }, []);
+
+  // Default step configuration
+  const defaultSteps: WorkflowStep[] = [
     {
       id: 1,
       title: "Idea Generation",
       description: "AI-powered topic suggestions and content planning",
       icon: <Lightbulb className="w-6 h-6" />,
-      status: 'completed',
-      preview: "Tech Review: Latest iPhone Features"
+      status: 'pending',
+      estimatedTime: "1 min"
     },
     {
       id: 2,
       title: "Script Creation",
       description: "Generate engaging scripts with AI assistance",
       icon: <FileText className="w-6 h-6" />,
-      status: 'completed',
-      estimatedTime: "2 min",
-      preview: "Welcome to today's tech review where we'll explore..."
+      status: 'pending',
+      estimatedTime: "2 min"
     },
     {
       id: 3,
       title: "Scene Planning",
       description: "Storyboard and visual scene breakdown",
       icon: <Camera className="w-6 h-6" />,
-      status: 'in-progress',
+      status: 'pending',
       estimatedTime: "3 min"
     },
     {
@@ -79,6 +95,16 @@ export default function WorkflowPipeline() {
       estimatedTime: "1 min"
     }
   ];
+
+  // Apply saved progress to steps
+  const steps: WorkflowStep[] = defaultSteps.map(step => ({
+    ...step,
+    status: (workflowProgress[step.id] as 'completed' | 'in-progress' | 'pending') || step.status
+  }));
+
+  // Calculate progress
+  const completedSteps = steps.filter(step => step.status === 'completed').length;
+  const progressPercentage = Math.round((completedSteps / steps.length) * 100);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -197,10 +223,10 @@ export default function WorkflowPipeline() {
       <div className="mt-8">
         <div className="flex items-center justify-between mb-2">
           <span className="text-sm font-medium text-gray-700">Overall Progress</span>
-          <span className="text-sm text-gray-500">2 of 6 steps completed</span>
+          <span className="text-sm text-gray-500">{completedSteps} of {steps.length} steps completed</span>
         </div>
         <div className="w-full bg-gray-200 rounded-full h-2">
-          <div className="bg-gradient-to-r from-indigo-600 to-purple-600 h-2 rounded-full" style={{ width: '33%' }}></div>
+          <div className="bg-gradient-to-r from-indigo-600 to-purple-600 h-2 rounded-full" style={{ width: `${progressPercentage}%` }}></div>
         </div>
       </div>
     </div>

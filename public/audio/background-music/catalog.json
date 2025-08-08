@@ -1,0 +1,1434 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2025-08-04",
+  "tracks": [
+    {
+      "id": "a_slippery_slope_everet_almond",
+      "title": "A Slippery Slope   Everet Almond",
+      "artist": "Local Music Library",
+      "duration": 170,
+      "genre": [
+        "cinematic",
+        "ambient"
+      ],
+      "mood": [
+        "dramatic",
+        "inspiring"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/A Slippery Slope - Everet Almond.mp3",
+      "previewUrl": "/audio/background-music/A Slippery Slope - Everet Almond.mp3",
+      "downloadUrl": "/audio/background-music/A Slippery Slope - Everet Almond.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "6.5 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.122Z"
+    },
+    {
+      "id": "akatsuki_rising_the_mini_vandals",
+      "title": "Akatsuki Rising   The Mini Vandals",
+      "artist": "Local Music Library",
+      "duration": 129,
+      "genre": [
+        "ambient",
+        "electronic"
+      ],
+      "mood": [
+        "calm",
+        "peaceful"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Akatsuki Rising - The Mini Vandals.mp3",
+      "previewUrl": "/audio/background-music/Akatsuki Rising - The Mini Vandals.mp3",
+      "downloadUrl": "/audio/background-music/Akatsuki Rising - The Mini Vandals.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "4.9 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.138Z"
+    },
+    {
+      "id": "all_in_everet_almond",
+      "title": "All In   Everet Almond",
+      "artist": "Local Music Library",
+      "duration": 188,
+      "genre": [
+        "cinematic",
+        "ambient"
+      ],
+      "mood": [
+        "dramatic",
+        "inspiring"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/All In - Everet Almond.mp3",
+      "previewUrl": "/audio/background-music/All In - Everet Almond.mp3",
+      "downloadUrl": "/audio/background-music/All In - Everet Almond.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "7.2 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.140Z"
+    },
+    {
+      "id": "circuit_rush_the_mini_vandals",
+      "title": "Circuit Rush   The Mini Vandals",
+      "artist": "Local Music Library",
+      "duration": 132,
+      "genre": [
+        "ambient",
+        "electronic"
+      ],
+      "mood": [
+        "calm",
+        "peaceful",
+        "energetic"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Circuit Rush - The Mini Vandals.mp3",
+      "previewUrl": "/audio/background-music/Circuit Rush - The Mini Vandals.mp3",
+      "downloadUrl": "/audio/background-music/Circuit Rush - The Mini Vandals.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "5 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.145Z"
+    },
+    {
+      "id": "club_love_everet_almond",
+      "title": "Club Love   Everet Almond",
+      "artist": "Local Music Library",
+      "duration": 183,
+      "genre": [
+        "cinematic",
+        "ambient"
+      ],
+      "mood": [
+        "romantic",
+        "dramatic",
+        "inspiring"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Club Love - Everet Almond.mp3",
+      "previewUrl": "/audio/background-music/Club Love - Everet Almond.mp3",
+      "downloadUrl": "/audio/background-music/Club Love - Everet Almond.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "7 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.147Z"
+    },
+    {
+      "id": "drifting_memories_the_mini_vandals",
+      "title": "Drifting Memories   The Mini Vandals",
+      "artist": "Local Music Library",
+      "duration": 183,
+      "genre": [
+        "ambient",
+        "electronic"
+      ],
+      "mood": [
+        "calm",
+        "peaceful"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Drifting Memories - The Mini Vandals.mp3",
+      "previewUrl": "/audio/background-music/Drifting Memories - The Mini Vandals.mp3",
+      "downloadUrl": "/audio/background-music/Drifting Memories - The Mini Vandals.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "7 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.150Z"
+    },
+    {
+      "id": "drum_or_bass_ryan_stasik",
+      "title": "Drum Or Bass   Ryan Stasik",
+      "artist": "Local Music Library",
+      "duration": 148,
+      "genre": [
+        "electronic",
+        "pop"
+      ],
+      "mood": [
+        "energetic",
+        "happy"
+      ],
+      "instrument": [
+        "bass",
+        "drums"
+      ],
+      "filePath": "/audio/background-music/Drum Or Bass - Ryan Stasik.mp3",
+      "previewUrl": "/audio/background-music/Drum Or Bass - Ryan Stasik.mp3",
+      "downloadUrl": "/audio/background-music/Drum Or Bass - Ryan Stasik.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "5.6 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.153Z"
+    },
+    {
+      "id": "floating_lanterns_the_mini_vandals",
+      "title": "Floating Lanterns   The Mini Vandals",
+      "artist": "Local Music Library",
+      "duration": 116,
+      "genre": [
+        "ambient",
+        "electronic"
+      ],
+      "mood": [
+        "calm",
+        "peaceful"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Floating Lanterns - The Mini Vandals.mp3",
+      "previewUrl": "/audio/background-music/Floating Lanterns - The Mini Vandals.mp3",
+      "downloadUrl": "/audio/background-music/Floating Lanterns - The Mini Vandals.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "4.4 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.157Z"
+    },
+    {
+      "id": "fontana_ryan_stasik_kanika_moore",
+      "title": "Fontana   Ryan Stasik, Kanika Moore",
+      "artist": "Local Music Library",
+      "duration": 136,
+      "genre": [
+        "electronic",
+        "pop"
+      ],
+      "mood": [
+        "energetic",
+        "happy"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Fontana - Ryan Stasik, Kanika Moore.mp3",
+      "previewUrl": "/audio/background-music/Fontana - Ryan Stasik, Kanika Moore.mp3",
+      "downloadUrl": "/audio/background-music/Fontana - Ryan Stasik, Kanika Moore.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "5.2 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.160Z"
+    },
+    {
+      "id": "from_here_on_in_everet_almond",
+      "title": "From Here On In   Everet Almond",
+      "artist": "Local Music Library",
+      "duration": 189,
+      "genre": [
+        "cinematic",
+        "ambient"
+      ],
+      "mood": [
+        "dramatic",
+        "inspiring"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/From Here on In - Everet Almond.mp3",
+      "previewUrl": "/audio/background-music/From Here on In - Everet Almond.mp3",
+      "downloadUrl": "/audio/background-music/From Here on In - Everet Almond.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "7.2 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.163Z"
+    },
+    {
+      "id": "ghibli_station_the_mini_vandals",
+      "title": "Ghibli Station   The Mini Vandals",
+      "artist": "Local Music Library",
+      "duration": 115,
+      "genre": [
+        "ambient",
+        "electronic",
+        "cinematic"
+      ],
+      "mood": [
+        "calm",
+        "peaceful"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Ghibli Station - The Mini Vandals.mp3",
+      "previewUrl": "/audio/background-music/Ghibli Station - The Mini Vandals.mp3",
+      "downloadUrl": "/audio/background-music/Ghibli Station - The Mini Vandals.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "4.4 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.170Z"
+    },
+    {
+      "id": "i_m_giving_up_everet_almond",
+      "title": "I'M Giving Up   Everet Almond",
+      "artist": "Local Music Library",
+      "duration": 218,
+      "genre": [
+        "cinematic",
+        "ambient"
+      ],
+      "mood": [
+        "dramatic",
+        "inspiring",
+        "sad"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/I'm Giving Up - Everet Almond.mp3",
+      "previewUrl": "/audio/background-music/I'm Giving Up - Everet Almond.mp3",
+      "downloadUrl": "/audio/background-music/I'm Giving Up - Everet Almond.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "8.3 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.175Z"
+    },
+    {
+      "id": "jomon_grove_the_mini_vandals",
+      "title": "Jomon Grove   The Mini Vandals",
+      "artist": "Local Music Library",
+      "duration": 187,
+      "genre": [
+        "ambient",
+        "electronic"
+      ],
+      "mood": [
+        "calm",
+        "peaceful"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Jomon Grove - The Mini Vandals.mp3",
+      "previewUrl": "/audio/background-music/Jomon Grove - The Mini Vandals.mp3",
+      "downloadUrl": "/audio/background-music/Jomon Grove - The Mini Vandals.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "7.1 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.178Z"
+    },
+    {
+      "id": "love_fast_ryan_stasik_kanika_moore",
+      "title": "Love Fast   Ryan Stasik, Kanika Moore",
+      "artist": "Local Music Library",
+      "duration": 130,
+      "genre": [
+        "electronic",
+        "pop"
+      ],
+      "mood": [
+        "energetic",
+        "romantic",
+        "happy"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Love Fast - Ryan Stasik, Kanika Moore.mp3",
+      "previewUrl": "/audio/background-music/Love Fast - Ryan Stasik, Kanika Moore.mp3",
+      "downloadUrl": "/audio/background-music/Love Fast - Ryan Stasik, Kanika Moore.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "4.9 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.179Z"
+    },
+    {
+      "id": "love_me_never_ending_everet_almond",
+      "title": "Love Me Never Ending   Everet Almond",
+      "artist": "Local Music Library",
+      "duration": 175,
+      "genre": [
+        "cinematic",
+        "ambient"
+      ],
+      "mood": [
+        "romantic",
+        "dramatic",
+        "inspiring"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Love Me Never Ending - Everet Almond.mp3",
+      "previewUrl": "/audio/background-music/Love Me Never Ending - Everet Almond.mp3",
+      "downloadUrl": "/audio/background-music/Love Me Never Ending - Everet Almond.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "6.7 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.182Z"
+    },
+    {
+      "id": "precious_girl_ryan_stasik_kanika_moore",
+      "title": "Precious Girl   Ryan Stasik, Kanika Moore",
+      "artist": "Local Music Library",
+      "duration": 193,
+      "genre": [
+        "electronic",
+        "pop"
+      ],
+      "mood": [
+        "energetic",
+        "happy"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Precious Girl - Ryan Stasik, Kanika Moore.mp3",
+      "previewUrl": "/audio/background-music/Precious Girl - Ryan Stasik, Kanika Moore.mp3",
+      "downloadUrl": "/audio/background-music/Precious Girl - Ryan Stasik, Kanika Moore.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "7.4 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.185Z"
+    },
+    {
+      "id": "rain_on_me_ryan_stasik_kanika_moore",
+      "title": "Rain On Me   Ryan Stasik, Kanika Moore",
+      "artist": "Local Music Library",
+      "duration": 167,
+      "genre": [
+        "electronic",
+        "pop",
+        "ambient"
+      ],
+      "mood": [
+        "energetic",
+        "happy",
+        "calm",
+        "peaceful"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Rain On Me - Ryan Stasik, Kanika Moore.mp3",
+      "previewUrl": "/audio/background-music/Rain On Me - Ryan Stasik, Kanika Moore.mp3",
+      "downloadUrl": "/audio/background-music/Rain On Me - Ryan Stasik, Kanika Moore.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "6.4 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.187Z"
+    },
+    {
+      "id": "rain_over_kyoto_station_the_mini_vandals",
+      "title": "Rain Over Kyoto Station   The Mini Vandals",
+      "artist": "Local Music Library",
+      "duration": 165,
+      "genre": [
+        "ambient",
+        "electronic",
+        "cinematic"
+      ],
+      "mood": [
+        "calm",
+        "peaceful"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Rain Over Kyoto Station - The Mini Vandals.mp3",
+      "previewUrl": "/audio/background-music/Rain Over Kyoto Station - The Mini Vandals.mp3",
+      "downloadUrl": "/audio/background-music/Rain Over Kyoto Station - The Mini Vandals.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "6.3 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.189Z"
+    },
+    {
+      "id": "scale_the_wall_everet_almond",
+      "title": "Scale The Wall   Everet Almond",
+      "artist": "Local Music Library",
+      "duration": 173,
+      "genre": [
+        "cinematic",
+        "ambient"
+      ],
+      "mood": [
+        "dramatic",
+        "inspiring"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Scale The Wall - Everet Almond.mp3",
+      "previewUrl": "/audio/background-music/Scale The Wall - Everet Almond.mp3",
+      "downloadUrl": "/audio/background-music/Scale The Wall - Everet Almond.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "6.6 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.191Z"
+    },
+    {
+      "id": "shadowstep_the_mini_vandals",
+      "title": "Shadowstep   The Mini Vandals",
+      "artist": "Local Music Library",
+      "duration": 142,
+      "genre": [
+        "ambient",
+        "electronic"
+      ],
+      "mood": [
+        "calm",
+        "peaceful"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Shadowstep - The Mini Vandals.mp3",
+      "previewUrl": "/audio/background-music/Shadowstep - The Mini Vandals.mp3",
+      "downloadUrl": "/audio/background-music/Shadowstep - The Mini Vandals.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "5.4 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.194Z"
+    },
+    {
+      "id": "take_it_over_ryan_stasik_kanika_moore",
+      "title": "Take It Over   Ryan Stasik, Kanika Moore",
+      "artist": "Local Music Library",
+      "duration": 143,
+      "genre": [
+        "electronic",
+        "pop"
+      ],
+      "mood": [
+        "energetic",
+        "happy"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Take It Over - Ryan Stasik, Kanika Moore.mp3",
+      "previewUrl": "/audio/background-music/Take It Over - Ryan Stasik, Kanika Moore.mp3",
+      "downloadUrl": "/audio/background-music/Take It Over - Ryan Stasik, Kanika Moore.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "5.5 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.196Z"
+    },
+    {
+      "id": "taking_in_the_changes_everet_almond",
+      "title": "Taking In The Changes   Everet Almond",
+      "artist": "Local Music Library",
+      "duration": 219,
+      "genre": [
+        "cinematic",
+        "ambient"
+      ],
+      "mood": [
+        "dramatic",
+        "inspiring",
+        "sad"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Taking in The Changes - Everet Almond.mp3",
+      "previewUrl": "/audio/background-music/Taking in The Changes - Everet Almond.mp3",
+      "downloadUrl": "/audio/background-music/Taking in The Changes - Everet Almond.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "8.3 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.198Z"
+    },
+    {
+      "id": "tell_em_what_they_wanna_hear_everet_almond",
+      "title": "Tell Em What They Wanna Hear   Everet Almond",
+      "artist": "Local Music Library",
+      "duration": 194,
+      "genre": [
+        "cinematic",
+        "ambient"
+      ],
+      "mood": [
+        "dramatic",
+        "inspiring"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Tell Em What They Wanna Hear - Everet Almond.mp3",
+      "previewUrl": "/audio/background-music/Tell Em What They Wanna Hear - Everet Almond.mp3",
+      "downloadUrl": "/audio/background-music/Tell Em What They Wanna Hear - Everet Almond.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "7.4 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.200Z"
+    },
+    {
+      "id": "van_life_rager_everet_almond",
+      "title": "Van Life Rager   Everet Almond",
+      "artist": "Local Music Library",
+      "duration": 168,
+      "genre": [
+        "cinematic",
+        "ambient"
+      ],
+      "mood": [
+        "dramatic",
+        "inspiring"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Van Life Rager - Everet Almond.mp3",
+      "previewUrl": "/audio/background-music/Van Life Rager - Everet Almond.mp3",
+      "downloadUrl": "/audio/background-music/Van Life Rager - Everet Almond.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "6.4 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.203Z"
+    },
+    {
+      "id": "viral_bliss_im_uncomfortable_ryan_stasik",
+      "title": "Viral Bliss, Im Uncomfortable   Ryan Stasik",
+      "artist": "Local Music Library",
+      "duration": 169,
+      "genre": [
+        "electronic",
+        "pop"
+      ],
+      "mood": [
+        "energetic",
+        "happy"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Viral Bliss, Im Uncomfortable - Ryan Stasik.mp3",
+      "previewUrl": "/audio/background-music/Viral Bliss, Im Uncomfortable - Ryan Stasik.mp3",
+      "downloadUrl": "/audio/background-music/Viral Bliss, Im Uncomfortable - Ryan Stasik.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "6.5 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.206Z"
+    },
+    {
+      "id": "viral_dance_ryan_stasik",
+      "title": "Viral Dance   Ryan Stasik",
+      "artist": "Local Music Library",
+      "duration": 138,
+      "genre": [
+        "electronic",
+        "pop"
+      ],
+      "mood": [
+        "energetic",
+        "happy"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Viral Dance - Ryan Stasik.mp3",
+      "previewUrl": "/audio/background-music/Viral Dance - Ryan Stasik.mp3",
+      "downloadUrl": "/audio/background-music/Viral Dance - Ryan Stasik.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "5.3 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.208Z"
+    },
+    {
+      "id": "viral_dirge_ryan_stasik",
+      "title": "Viral Dirge   Ryan Stasik",
+      "artist": "Local Music Library",
+      "duration": 133,
+      "genre": [
+        "electronic",
+        "pop"
+      ],
+      "mood": [
+        "energetic",
+        "happy"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Viral Dirge - Ryan Stasik.mp3",
+      "previewUrl": "/audio/background-music/Viral Dirge - Ryan Stasik.mp3",
+      "downloadUrl": "/audio/background-music/Viral Dirge - Ryan Stasik.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "5.1 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.211Z"
+    },
+    {
+      "id": "when_will_i_return_ryan_stasik_kanika_moore",
+      "title": "When Will I Return   Ryan Stasik, Kanika Moore",
+      "artist": "Local Music Library",
+      "duration": 154,
+      "genre": [
+        "electronic",
+        "pop"
+      ],
+      "mood": [
+        "energetic",
+        "happy",
+        "sad",
+        "dramatic"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/When Will I Return - Ryan Stasik, Kanika Moore.mp3",
+      "previewUrl": "/audio/background-music/When Will I Return - Ryan Stasik, Kanika Moore.mp3",
+      "downloadUrl": "/audio/background-music/When Will I Return - Ryan Stasik, Kanika Moore.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "5.9 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.214Z"
+    },
+    {
+      "id": "with_you_everet_almond",
+      "title": "With You   Everet Almond",
+      "artist": "Local Music Library",
+      "duration": 162,
+      "genre": [
+        "cinematic",
+        "ambient"
+      ],
+      "mood": [
+        "dramatic",
+        "inspiring"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/With You - Everet Almond.mp3",
+      "previewUrl": "/audio/background-music/With You - Everet Almond.mp3",
+      "downloadUrl": "/audio/background-music/With You - Everet Almond.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "6.2 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.237Z"
+    },
+    {
+      "id": "wrangle_the_crazy_everet_almond",
+      "title": "Wrangle The Crazy   Everet Almond",
+      "artist": "Local Music Library",
+      "duration": 173,
+      "genre": [
+        "cinematic",
+        "ambient"
+      ],
+      "mood": [
+        "dramatic",
+        "inspiring"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Wrangle The Crazy - Everet Almond.mp3",
+      "previewUrl": "/audio/background-music/Wrangle The Crazy - Everet Almond.mp3",
+      "downloadUrl": "/audio/background-music/Wrangle The Crazy - Everet Almond.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "6.6 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-07-31T14:20:08.259Z"
+    },
+    {
+      "id": "aomori_wings_the_mini_vandals",
+      "title": "Aomori Wings   The Mini Vandals",
+      "artist": "Local Music Library",
+      "duration": 123,
+      "genre": [
+        "ambient",
+        "electronic"
+      ],
+      "mood": [
+        "calm",
+        "peaceful"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Aomori Wings - The Mini Vandals.mp3",
+      "previewUrl": "/audio/background-music/Aomori Wings - The Mini Vandals.mp3",
+      "downloadUrl": "/audio/background-music/Aomori Wings - The Mini Vandals.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "4.7 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.595Z"
+    },
+    {
+      "id": "brave_mark_karan_scott_guberman_angeline_saris_jeremy_hoenig",
+      "title": "Brave   Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig",
+      "artist": "Local Music Library",
+      "duration": 176,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Brave - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "previewUrl": "/audio/background-music/Brave - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "downloadUrl": "/audio/background-music/Brave - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "6.7 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.603Z"
+    },
+    {
+      "id": "bring_it_together_telecasted",
+      "title": "Bring It Together   Telecasted",
+      "artist": "Local Music Library",
+      "duration": 129,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Bring It Together - Telecasted.mp3",
+      "previewUrl": "/audio/background-music/Bring It Together - Telecasted.mp3",
+      "downloadUrl": "/audio/background-music/Bring It Together - Telecasted.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "4.9 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.606Z"
+    },
+    {
+      "id": "cash_mark_karan_scott_guberman_angeline_saris_jeremy_hoenig",
+      "title": "Cash   Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig",
+      "artist": "Local Music Library",
+      "duration": 142,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Cash - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "previewUrl": "/audio/background-music/Cash - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "downloadUrl": "/audio/background-music/Cash - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "5.4 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.611Z"
+    },
+    {
+      "id": "celestial_distortion_mark_karan_scott_guberman_angeline_saris_jeremy_hoenig",
+      "title": "Celestial Distortion   Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig",
+      "artist": "Local Music Library",
+      "duration": 174,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Celestial Distortion - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "previewUrl": "/audio/background-music/Celestial Distortion - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "downloadUrl": "/audio/background-music/Celestial Distortion - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "6.6 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.614Z"
+    },
+    {
+      "id": "clocks_mark_karan_scott_guberman_angeline_saris_jeremy_hoenig",
+      "title": "Clocks   Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig",
+      "artist": "Local Music Library",
+      "duration": 184,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Clocks - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "previewUrl": "/audio/background-music/Clocks - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "downloadUrl": "/audio/background-music/Clocks - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "7 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.616Z"
+    },
+    {
+      "id": "clouds_lifting_telecasted",
+      "title": "Clouds Lifting   Telecasted",
+      "artist": "Local Music Library",
+      "duration": 129,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Clouds Lifting - Telecasted.mp3",
+      "previewUrl": "/audio/background-music/Clouds Lifting - Telecasted.mp3",
+      "downloadUrl": "/audio/background-music/Clouds Lifting - Telecasted.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "4.9 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.618Z"
+    },
+    {
+      "id": "conspiracy_theory_rod_kim",
+      "title": "Conspiracy Theory   Rod Kim",
+      "artist": "Local Music Library",
+      "duration": 96,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Conspiracy Theory - Rod Kim.mp3",
+      "previewUrl": "/audio/background-music/Conspiracy Theory - Rod Kim.mp3",
+      "downloadUrl": "/audio/background-music/Conspiracy Theory - Rod Kim.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "3.7 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.621Z"
+    },
+    {
+      "id": "country_funk_telecasted",
+      "title": "Country Funk   Telecasted",
+      "artist": "Local Music Library",
+      "duration": 136,
+      "genre": [
+        "folk",
+        "ambient"
+      ],
+      "mood": [
+        "happy",
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Country Funk - Telecasted.mp3",
+      "previewUrl": "/audio/background-music/Country Funk - Telecasted.mp3",
+      "downloadUrl": "/audio/background-music/Country Funk - Telecasted.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "5.2 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.623Z"
+    },
+    {
+      "id": "country_sky_telecasted",
+      "title": "Country Sky   Telecasted",
+      "artist": "Local Music Library",
+      "duration": 132,
+      "genre": [
+        "folk",
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Country Sky - Telecasted.mp3",
+      "previewUrl": "/audio/background-music/Country Sky - Telecasted.mp3",
+      "downloadUrl": "/audio/background-music/Country Sky - Telecasted.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "5 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.628Z"
+    },
+    {
+      "id": "duty_calls_rod_kim",
+      "title": "Duty Calls   Rod Kim",
+      "artist": "Local Music Library",
+      "duration": 103,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Duty Calls - Rod Kim.mp3",
+      "previewUrl": "/audio/background-music/Duty Calls - Rod Kim.mp3",
+      "downloadUrl": "/audio/background-music/Duty Calls - Rod Kim.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "3.9 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.630Z"
+    },
+    {
+      "id": "final_boss_battle_rod_kim",
+      "title": "Final Boss Battle   Rod Kim",
+      "artist": "Local Music Library",
+      "duration": 101,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Final Boss Battle - Rod Kim.mp3",
+      "previewUrl": "/audio/background-music/Final Boss Battle - Rod Kim.mp3",
+      "downloadUrl": "/audio/background-music/Final Boss Battle - Rod Kim.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "3.8 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.633Z"
+    },
+    {
+      "id": "for_our_friends_telecasted",
+      "title": "For Our Friends   Telecasted",
+      "artist": "Local Music Library",
+      "duration": 134,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/For Our Friends - Telecasted.mp3",
+      "previewUrl": "/audio/background-music/For Our Friends - Telecasted.mp3",
+      "downloadUrl": "/audio/background-music/For Our Friends - Telecasted.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "5.1 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.635Z"
+    },
+    {
+      "id": "golden_hour_telecasted",
+      "title": "Golden Hour   Telecasted",
+      "artist": "Local Music Library",
+      "duration": 140,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Golden Hour - Telecasted.mp3",
+      "previewUrl": "/audio/background-music/Golden Hour - Telecasted.mp3",
+      "downloadUrl": "/audio/background-music/Golden Hour - Telecasted.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "5.4 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.640Z"
+    },
+    {
+      "id": "hanging_motionless_mark_karan_scott_guberman_angeline_saris_jeremy_hoenig",
+      "title": "Hanging Motionless   Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig",
+      "artist": "Local Music Library",
+      "duration": 196,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Hanging Motionless - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "previewUrl": "/audio/background-music/Hanging Motionless - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "downloadUrl": "/audio/background-music/Hanging Motionless - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "7.5 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.646Z"
+    },
+    {
+      "id": "hot_drop_bus_rod_kim",
+      "title": "Hot Drop Bus   Rod Kim",
+      "artist": "Local Music Library",
+      "duration": 116,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Hot Drop Bus - Rod Kim.mp3",
+      "previewUrl": "/audio/background-music/Hot Drop Bus - Rod Kim.mp3",
+      "downloadUrl": "/audio/background-music/Hot Drop Bus - Rod Kim.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "4.4 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.651Z"
+    },
+    {
+      "id": "long_distance_mark_karan_scott_guberman_angeline_saris_jeremy_hoenig",
+      "title": "Long Distance   Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig",
+      "artist": "Local Music Library",
+      "duration": 198,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Long Distance - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "previewUrl": "/audio/background-music/Long Distance - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "downloadUrl": "/audio/background-music/Long Distance - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "7.6 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.659Z"
+    },
+    {
+      "id": "merry_go_round_telecasted",
+      "title": "Merry Go Round   Telecasted",
+      "artist": "Local Music Library",
+      "duration": 123,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Merry Go Round - Telecasted.mp3",
+      "previewUrl": "/audio/background-music/Merry Go Round - Telecasted.mp3",
+      "downloadUrl": "/audio/background-music/Merry Go Round - Telecasted.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "4.7 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.661Z"
+    },
+    {
+      "id": "numb_sky_mark_karan_scott_guberman_angeline_saris_jeremy_hoenig",
+      "title": "Numb Sky   Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig",
+      "artist": "Local Music Library",
+      "duration": 238,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Numb Sky - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "previewUrl": "/audio/background-music/Numb Sky - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "downloadUrl": "/audio/background-music/Numb Sky - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "9.1 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.665Z"
+    },
+    {
+      "id": "obon_fog_the_mini_vandals",
+      "title": "Obon Fog   The Mini Vandals",
+      "artist": "Local Music Library",
+      "duration": 159,
+      "genre": [
+        "ambient",
+        "electronic"
+      ],
+      "mood": [
+        "calm",
+        "peaceful"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Obon Fog - The Mini Vandals.mp3",
+      "previewUrl": "/audio/background-music/Obon Fog - The Mini Vandals.mp3",
+      "downloadUrl": "/audio/background-music/Obon Fog - The Mini Vandals.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "6.1 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.671Z"
+    },
+    {
+      "id": "ordinary_men_mark_karan_scott_guberman_angeline_saris_jeremy_hoenig",
+      "title": "Ordinary Men   Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig",
+      "artist": "Local Music Library",
+      "duration": 180,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Ordinary Men - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "previewUrl": "/audio/background-music/Ordinary Men - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "downloadUrl": "/audio/background-music/Ordinary Men - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "6.9 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.674Z"
+    },
+    {
+      "id": "repeat_mark_karan_scott_guberman_angeline_saris_jeremy_hoenig",
+      "title": "Repeat   Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig",
+      "artist": "Local Music Library",
+      "duration": 105,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Repeat - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "previewUrl": "/audio/background-music/Repeat - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "downloadUrl": "/audio/background-music/Repeat - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "4 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.678Z"
+    },
+    {
+      "id": "spandex_man_the_animated_series_rod_kim",
+      "title": "Spandex Man The Animated Series   Rod Kim",
+      "artist": "Local Music Library",
+      "duration": 98,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "peaceful",
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Spandex-Man The Animated Series - Rod Kim.mp3",
+      "previewUrl": "/audio/background-music/Spandex-Man The Animated Series - Rod Kim.mp3",
+      "downloadUrl": "/audio/background-music/Spandex-Man The Animated Series - Rod Kim.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "3.7 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.682Z"
+    },
+    {
+      "id": "swimming_in_a_fish_bowl_mark_karan_scott_guberman_angeline_saris_jeremy_hoenig",
+      "title": "Swimming In A Fish Bowl   Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig",
+      "artist": "Local Music Library",
+      "duration": 182,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Swimming In A Fish Bowl - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "previewUrl": "/audio/background-music/Swimming In A Fish Bowl - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "downloadUrl": "/audio/background-music/Swimming In A Fish Bowl - Mark Karan, Scott Guberman, Angeline Saris, Jeremy Hoenig.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "6.9 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.684Z"
+    },
+    {
+      "id": "test_your_fight_rod_kim",
+      "title": "Test Your Fight   Rod Kim",
+      "artist": "Local Music Library",
+      "duration": 95,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Test Your Fight - Rod Kim.mp3",
+      "previewUrl": "/audio/background-music/Test Your Fight - Rod Kim.mp3",
+      "downloadUrl": "/audio/background-music/Test Your Fight - Rod Kim.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "3.6 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.686Z"
+    },
+    {
+      "id": "tomorrow_s_light_telecasted",
+      "title": "Tomorrow'S Light   Telecasted",
+      "artist": "Local Music Library",
+      "duration": 126,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Tomorrow's Light - Telecasted.mp3",
+      "previewUrl": "/audio/background-music/Tomorrow's Light - Telecasted.mp3",
+      "downloadUrl": "/audio/background-music/Tomorrow's Light - Telecasted.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "4.8 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.688Z"
+    },
+    {
+      "id": "true_crime_documentary_and_chill_rod_kim",
+      "title": "True Crime Documentary And Chill   Rod Kim",
+      "artist": "Local Music Library",
+      "duration": 125,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/True Crime Documentary and Chill - Rod Kim.mp3",
+      "previewUrl": "/audio/background-music/True Crime Documentary and Chill - Rod Kim.mp3",
+      "downloadUrl": "/audio/background-music/True Crime Documentary and Chill - Rod Kim.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "4.8 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.690Z"
+    },
+    {
+      "id": "y2k_heist_rod_kim",
+      "title": "Y2K Heist   Rod Kim",
+      "artist": "Local Music Library",
+      "duration": 120,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/Y2K Heist - Rod Kim.mp3",
+      "previewUrl": "/audio/background-music/Y2K Heist - Rod Kim.mp3",
+      "downloadUrl": "/audio/background-music/Y2K Heist - Rod Kim.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "4.6 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.692Z"
+    },
+    {
+      "id": "you_and_i_telecasted",
+      "title": "You And I   Telecasted",
+      "artist": "Local Music Library",
+      "duration": 126,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/You and I - Telecasted.mp3",
+      "previewUrl": "/audio/background-music/You and I - Telecasted.mp3",
+      "downloadUrl": "/audio/background-music/You and I - Telecasted.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "4.8 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.694Z"
+    },
+    {
+      "id": "uwu_victory_rod_kim",
+      "title": "UWu Victory   Rod Kim",
+      "artist": "Local Music Library",
+      "duration": 105,
+      "genre": [
+        "ambient"
+      ],
+      "mood": [
+        "bright"
+      ],
+      "instrument": [],
+      "filePath": "/audio/background-music/uWu Victory - Rod Kim.mp3",
+      "previewUrl": "/audio/background-music/uWu Victory - Rod Kim.mp3",
+      "downloadUrl": "/audio/background-music/uWu Victory - Rod Kim.mp3",
+      "attribution": false,
+      "monetizable": true,
+      "thumbnailUrl": "/audio/background-music/thumbnails/default.jpg",
+      "fileSize": "4 MB",
+      "bitrate": "320kbps",
+      "addedAt": "2025-08-04T11:54:55.695Z"
+    }
+  ],
+  "categories": {
+    "moods": [
+      "bright",
+      "calm",
+      "dramatic",
+      "energetic",
+      "happy",
+      "inspiring",
+      "peaceful",
+      "romantic",
+      "sad"
+    ],
+    "genres": [
+      "ambient",
+      "cinematic",
+      "electronic",
+      "folk",
+      "pop"
+    ],
+    "instruments": [
+      "bass",
+      "drums"
+    ]
+  }
+}

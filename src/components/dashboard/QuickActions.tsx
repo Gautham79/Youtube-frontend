@@ -2,6 +2,7 @@
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 import { 
   Plus, 
   Layout, 
@@ -10,33 +11,53 @@ import {
   CreditCard, 
   HelpCircle,
   TrendingUp,
-  Sparkles
+  Sparkles,
+  Lightbulb
 } from "lucide-react";
 
 export default function QuickActions() {
+  const router = useRouter();
+
   const quickActions = [
+    {
+      title: "Generate Ideas",
+      description: "Discover trending topics and get content ideas",
+      icon: <Lightbulb className="w-5 h-5" />,
+      color: "bg-gradient-to-r from-indigo-600 to-purple-600",
+      textColor: "text-white",
+      href: "/dashboard/idea-generation"
+    },
     {
       title: "Create New Video",
       description: "Start from scratch with AI assistance",
       icon: <Plus className="w-5 h-5" />,
-      color: "bg-gradient-to-r from-indigo-600 to-purple-600",
-      textColor: "text-white"
+      color: "bg-blue-50",
+      textColor: "text-blue-700",
+      href: "#"
     },
     {
       title: "Browse Templates",
       description: "Choose from pre-made video templates",
       icon: <Layout className="w-5 h-5" />,
-      color: "bg-blue-50",
-      textColor: "text-blue-700"
+      color: "bg-green-50",
+      textColor: "text-green-700",
+      href: "#"
     },
     {
       title: "Upload Content",
       description: "Import your own media files",
       icon: <Upload className="w-5 h-5" />,
-      color: "bg-green-50",
-      textColor: "text-green-700"
+      color: "bg-orange-50",
+      textColor: "text-orange-700",
+      href: "#"
     }
   ];
+
+  const handleActionClick = (href: string) => {
+    if (href !== "#") {
+      router.push(href);
+    }
+  };
 
   const trendingTopics = [
     "AI Technology Review",
@@ -53,9 +74,13 @@ export default function QuickActions() {
         {/* Quick Actions */}
         <div className="lg:col-span-3">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Quick Actions</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {quickActions.map((action, index) => (
-              <Card key={index} className={`p-6 cursor-pointer hover:shadow-lg transition-all ${action.color}`}>
+              <Card 
+                key={index} 
+                className={`p-6 cursor-pointer hover:shadow-lg transition-all ${action.color}`}
+                onClick={() => handleActionClick(action.href)}
+              >
                 <div className={`${action.textColor}`}>
                   <div className="mb-4">
                     {action.icon}

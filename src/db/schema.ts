@@ -246,3 +246,109 @@ export type NewWebhook = typeof webhooksTable.$inferInsert;
 
 export type PaymentProviderConfig = typeof paymentProvidersConfigTable.$inferSelect;
 export type NewPaymentProviderConfig = typeof paymentProvidersConfigTable.$inferInsert;
+
+// YouTube categories table - Cache available categories by region
+export const youtubeCategoriesTable = pgTable("youtube_categories", {
+  id: integer('id').primaryKey(), // YouTube category ID
+  region_code: varchar('region_code', { length: 2 }).notNull(),
+  title: varchar('title', { length: 100 }).notNull(),
+  assignable: boolean('assignable').default(true).notNull(),
+  cached_at: timestamp('cached_at').defaultNow().notNull(),
+  expires_at: timestamp('expires_at').notNull(),
+});
+
+// Trending topics cache table - Store trending videos/topics
+export const trendingTopicsTable = pgTable("trending_topics", {
+  id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
+  category_id: integer('category_id').notNull(),
+  region_code: varchar('region_code', { length: 2 }).notNull(),
+  video_id: varchar('video_id', { length: 50 }).notNull(),
+  title: varchar('title', { length: 255 }).notNull(),
+  description: text('description'),
+  channel_title: varchar('channel_title', { length: 255 }),
+  view_count: varchar('view_count', { length: 50 }), // Store as string to handle large numbers
+  like_count: varchar('like_count', { length: 50 }),
+  comment_count: varchar('comment_count', { length: 50 }),
+  published_at: timestamp('published_at').notNull(),
+  thumbnail_url: text('thumbnail_url'),
+  tags: text('tags'), // JSON array of tags
+  cached_at: timestamp('cached_at').defaultNow().notNull(),
+  expires_at: timestamp('expires_at').notNull(),
+});
+
+// User preferences table - Store user's favorite categories and settings
+export const userPreferencesTable = pgTable("user_preferences", {
+  id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
+  user_id: uuid('user_id').references(() => usersTable.id, { onDelete: 'cascade' }).notNull().unique(),
+  favorite_categories: text('favorite_categories'), // JSON array of category IDs
+  preferred_region: varchar('preferred_region', { length: 2 }).default('US'),
+  language_preference: varchar('language_preference', { length: 10 }).default('en'),
+  content_type_preferences: text('content_type_preferences'), // JSON array of preferences
+  created_at: timestamp('created_at').defaultNow().notNull(),
+  updated_at: timestamp('updated_at').defaultNow().notNull(),
+});
+
+// Generated ideas table - Store user's generated content ideas
+export const generatedIdeasTable = pgTable("generated_ideas", {
+  id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
+  user_id: uuid('user_id').references(() => usersTable.id, { onDelete: 'cascade' }).notNull(),
+  category_id: integer('category_id').notNull(),
+  source_video_id: varchar('source_video_id', { length: 50 }),
+  title: varchar('title', { length: 255 }).notNull(),
+  description: text('description'),
+  suggested_keywords: text('suggested_keywords'), // JSON array of keywords
+  content_angle: text('content_angle'),
+  target_audience: varchar('target_audience', { length: 255 }),
+  estimated_duration: varchar('estimated_duration', { length: 50 }),
+  difficulty_level: varchar('difficulty_level', { length: 20 }), // 'beginner', 'intermediate', 'advanced'
+  is_saved: boolean('is_saved').default(false),
+  is_used: boolean('is_used').default(false),
+  used_at: timestamp('used_at'),
+  created_at: timestamp('created_at').defaultNow().notNull(),
+  updated_at: timestamp('updated_at').defaultNow().notNull(),
+});
+
+// Idea generation sessions table - Track user sessions for analytics
+export const ideaGenerationSessionsTable = pgTable("idea_generation_sessions", {
+  id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
+  user_id: uuid('user_id').references(() => usersTable.id, { onDelete: 'cascade' }).notNull(),
+  session_id: varchar('session_id', { length: 255 }).notNull(),
+  category_id: integer('category_id').notNull(),
+  region_code: varchar('region_code', { length: 2 }).notNull(),
+  ideas_generated: integer('ideas_generated').default(0),
+  ideas_saved: integer('ideas_saved').default(0),
+  session_duration: integer('session_duration'), // in seconds
+  created_at: timestamp('created_at').defaultNow().notNull(),
+  ended_at: timestamp('ended_at'),
+});
+
+// Export new types for TypeScript
+export type YoutubeCategory = typeof youtubeCategoriesTable.$inferSelect;
+export type NewYoutubeCategory = typeof youtubeCategoriesTable.$inferInsert;
+
+export type TrendingTopic = typeof trendingTopicsTable.$inferSelect;
+export type NewTrendingTopic = typeof trendingTopicsTable.$inferInsert;
+
+export type UserPreferences = typeof userPreferencesTable.$inferSelect;
+export type NewUserPreferences = typeof userPreferencesTable.$inferInsert;
+
+export type GeneratedIdea = typeof generatedIdeasTable.$inferSelect;
+export type NewGeneratedIdea = typeof generatedIdeasTable.$inferInsert;
+
+export type IdeaGenerationSession = typeof ideaGenerationSessionsTable.$inferSelect;
+export type NewIdeaGenerationSession = typeof ideaGenerationSessionsTable.$inferInsert;
+
+// YouTube tokens table - Store OAuth tokens for YouTube API access
+export const youtubeTokensTable = pgTable("youtube_tokens", {
+  id: uuid('id').primaryKey().defaultRandom(),
+  user_id: uuid('user_id').references(() => usersTable.id, { onDelete: 'cascade' }).notNull().unique(),
+  access_token: text('access_token').notNull(),
+  refresh_token: text('refresh_token').notNull(),
+  expires_at: timestamp('expires_at').notNull(),
+  created_at: timestamp('created_at').defaultNow().notNull(),
+  updated_at: timestamp('updated_at').defaultNow().notNull(),
+});
+
+// Export YouTube tokens types for TypeScript
+export type YoutubeTokens = typeof youtubeTokensTable.$inferSelect;
+export type NewYoutubeTokens = typeof youtubeTokensTable.$inferInsert;

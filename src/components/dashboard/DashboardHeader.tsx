@@ -3,13 +3,15 @@
 import { User } from "@supabase/supabase-js";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Plus, Video, Eye, Zap } from "lucide-react";
+import { Plus, Video, Eye, Zap, RotateCcw } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface DashboardHeaderProps {
   user: User;
 }
 
 export default function DashboardHeader({ user }: DashboardHeaderProps) {
+  const router = useRouter();
   const userName = user.user_metadata?.full_name || user.email?.split('@')[0] || 'User';
   
   // Mock data - in real app, this would come from API
@@ -17,6 +19,23 @@ export default function DashboardHeader({ user }: DashboardHeaderProps) {
     videosCreated: 12,
     totalViews: 2847,
     creditsRemaining: 85
+  };
+
+  const handleResetAllSteps = () => {
+    // Clear any localStorage data
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('workflow-progress');
+      localStorage.removeItem('video-projects');
+      localStorage.removeItem('saved-ideas');
+      localStorage.removeItem('user-preferences');
+    }
+    
+    // Refresh the page to reset all states
+    window.location.reload();
+  };
+
+  const handleIdeaGeneration = () => {
+    router.push('/dashboard/idea-generation');
   };
 
   return (
@@ -35,10 +54,20 @@ export default function DashboardHeader({ user }: DashboardHeaderProps) {
           <div className="flex flex-col sm:flex-row gap-4">
             <Button 
               size="lg" 
+              variant="outline"
+              className="bg-transparent border-white text-white hover:bg-white hover:text-indigo-600 font-semibold"
+              onClick={handleResetAllSteps}
+            >
+              <RotateCcw className="w-5 h-5 mr-2" />
+              Reset All Steps
+            </Button>
+            <Button 
+              size="lg" 
               className="bg-white text-indigo-600 hover:bg-gray-50 font-semibold"
+              onClick={handleIdeaGeneration}
             >
               <Plus className="w-5 h-5 mr-2" />
-              Create New Video
+              Idea Generation
             </Button>
           </div>
         </div>
